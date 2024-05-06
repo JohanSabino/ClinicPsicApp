@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patient_companions', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('last_name');
-            $table->unsignedInteger('age');
-            $table->string('bond');
+        Schema::create('clinic_histories_cie_codes', function (Blueprint $table) {
+            $table->id()->primary();
+            $table->foreignUuid('cie_code_id')->constrained('cie_codes');
+            $table->foreignUuid('clinic_history_id')->constrained('clinic_histories');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patient_companions');
+        Schema::dropIfExists('clinic_histories_cie_codes');
     }
 };

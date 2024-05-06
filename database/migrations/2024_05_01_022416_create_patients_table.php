@@ -12,23 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('document_type_id');
-            $table->string('identification_number');
-            $table->string('name');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('document_type_id')->constrained('document_types');
+            $table->string('identification_number')->unique();
+            $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
             $table->date('birth_date');
-            $table->string('gender')->nullable();
-            $table->string('address')->nullable();
-            $table->string('marital_status')->nullable();
-            $table->string('school_grade')->nullable();
-            $table->string('eps_company')->nullable();
+            $table->string('gender');
+            $table->string('sexual_orientation');
+            $table->integer('height');
+            $table->integer('weight');
+            $table->string('address');
+            $table->string('marital_status');
+            $table->string('school_grades');
+            $table->string('eps_company');
             $table->string('occupation')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('document_type_id')->references('id')->on('document_types');
         });
     }
 
