@@ -8,6 +8,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -16,7 +17,7 @@ use Illuminate\Support\Carbon;
 
 
 /**
- * 
+ *
  *
  * @property string $uuid
  * @property string $name
@@ -29,7 +30,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -46,7 +47,7 @@ use Illuminate\Support\Carbon;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUuids;
+    use HasFactory, Notifiable, HasUuids, softDeletes;
 
     /**
      * The attributes that are mass assignable.
