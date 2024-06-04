@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\DocumentType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DocumentTypeSeeder extends Seeder
@@ -26,7 +25,7 @@ class DocumentTypeSeeder extends Seeder
             'name' => 'PPT'
         ]);
         DocumentType::factory()->create([
-            'name' => 'ReTHUS'
+            'name' => 'pasaporte'
         ]);
     }
 }

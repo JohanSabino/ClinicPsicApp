@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\DocumentType;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,8 +21,10 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'Admin',
             'last_name' => 'Admin Last name',
             'email' => 'adm1n1str4tor.admin@logicwork.com',
+            'password' => Hash::make('password123')
         ]);
 
-        $this->call(User::class);
+
+        $this->call(DocumentTypeSeeder::class);
     }
 }

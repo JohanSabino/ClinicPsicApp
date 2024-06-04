@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('companions', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('first_name');
             $table->string('last_name');
             $table->integer('age')->nullable();

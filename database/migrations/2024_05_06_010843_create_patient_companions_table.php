@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('patient_companions', function (Blueprint $table) {
-            $table->id()->primary();
-            $table->foreignUuid('patient_id')->constrained('patients');
-            $table->foreignUuid('companion_id')->constrained('companions');
+            $table->id();
+            $table->foreignId('patient_id')->constrained('patients');
+            $table->foreignId('companion_id')->constrained('companions');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('document_type_id')->constrained('document_types');
+            $table->id();
+            $table->foreignId('document_type_id')->constrained('document_types');
             $table->string('identification_number')->unique();
             $table->string('first_name');
             $table->string('last_name');

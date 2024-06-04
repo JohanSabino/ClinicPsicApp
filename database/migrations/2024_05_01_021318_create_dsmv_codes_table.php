@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dsmv_codes', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('code')->unique();
             $table->string('name')->unique();
             $table->softDeletes();

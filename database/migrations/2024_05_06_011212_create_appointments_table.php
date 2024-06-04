@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('appointments', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('patient_id')->constrained('patients');
-            $table->foreignUuid('psychologist_id')->constrained('psychologists');
+            $table->id();
+            $table->foreignId('patient_id')->constrained('patients');
+            $table->foreignId('psychologist_id')->constrained('psychologists');
             $table->integer('session_number');
             $table->integer('status');
             $table->text('goals')->nullable();

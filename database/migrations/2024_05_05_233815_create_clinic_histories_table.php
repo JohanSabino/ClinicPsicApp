@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clinic_histories', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('patient_id')->constrained('patients');
+            $table->id();
+            $table->foreignId('patient_id')->constrained('patients');
             $table->text('reason_for_consultation_type');
             $table->text('reason_for_consultation');
             $table->text('trigger_for_consultation');
