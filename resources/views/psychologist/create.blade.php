@@ -1,6 +1,25 @@
 <x-guest-layout>
     <div class="container pt-24 px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center h-full">
-        <form>
+        @if(Session::exists('success'))
+            <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium">Success alert!</span> {{ Session::get('success') }}
+                </div>
+            </div>
+        @endif
+        @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error  }}</li>
+                @endforeach
+            </ul>
+        @endif
+        <form method="POST" action="{{ route('psychologist.store') }}">
+            @csrf
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Registro de Psicologos</h2>
@@ -8,62 +27,56 @@
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nombres</label>
+                            <x-form.form-label for="first_name">{{ __('Nombres') }}</x-form.form-label>
                             <div class="mt-2">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <x-form.form-input type="text" name="first_name" id="first_name" autocomplete="first_name"/>
+                                <x-form.form-error name="first_name"/>
                             </div>
                         </div>
 
                         <div class="sm:col-span-3">
-                            <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Apellidos</label>
+                            <x-form.form-label for="last-name">{{ __('Apellidos') }}</x-form.form-label>
                             <div class="mt-2">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <x-form.form-input type="text" name="last-name" id="last-name" autocomplete="last-name"/>
+                                <x-form.form-error name="last-name"/>
                             </div>
                         </div>
 
                         <div class="sm:col-span-4">
-                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                            <x-form.form-label for="email">{{ __('Correo electrónico') }}</x-form.form-label>
                             <div class="mt-2">
-                                <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <x-form.form-input id="email" name="email" type="email" autocomplete="email"/>
+                                <x-form.form-error name="email"/>
                             </div>
                         </div>
 
                         <div class="sm:col-span-3">
-                            <label for="document_type_id" class="block text-sm font-medium leading-6 text-gray-900">Tipo de Documento:</label>
+                            <x-form.form-label for="document-type">{{ __('Tipo de Documento') }}</x-form.form-label>
                             <div class="mt-2">
-                                <select id="document_type_id" name="document_type_id" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>Mexico</option>
+                                <select id="document-type" name="document-type" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                    <option value="">-- Selecciona una opción --</option>
+                                    @foreach($documentTypes as $documentType)
+                                        <option value="{{ $documentType->id }}">{{ $documentType->name }}</option>
+                                    @endforeach
                                 </select>
+                                <x-form.form-error name="document-type"/>
                             </div>
                         </div>
 
-                        <div class="col-span-full">
-                            <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Street address</label>
+                        <div class="sm:col-span-3">
+                            <x-form.form-label for="identification-number">{{ __('Número de Documento') }}</x-form.form-label>
                             <div class="mt-2">
-                                <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <x-form.form-input type="number" name="identification-number" id="identification-number" autocomplete="identification-number"/>
+                                <x-form.form-error name="identification-number"/>
                             </div>
                         </div>
 
-                        <div class="sm:col-span-2 sm:col-start-1">
-                            <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
-                            <div class="mt-2">
-                                <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
-                        </div>
 
-                        <div class="sm:col-span-2">
-                            <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
+                        <div class="sm:col-span-3">
+                            <x-form.form-label for="professional-card-number">{{ __('Número de Tarjeta Profesional') }}</x-form.form-label>
                             <div class="mt-2">
-                                <input type="text" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-2">
-                            <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
-                            <div class="mt-2">
-                                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <x-form.form-input type="text" name="professional-card-number" id="professional-card-number" autocomplete="professional-card-number"/>
+                                <x-form.form-error name="professional-card-number"/>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@ enum DocumentType: int
      * document types used for psychologist
      * @return DocumentType[]
      */
-    public function psychologists(): array
+    public static function psychologists(): array
     {
         return [self::Cedula];
     }
@@ -47,7 +47,7 @@ enum DocumentType: int
      * document types for psychologist
      * @return DocumentType[]
      */
-    public function patients(): array
+    public static function patients(): array
     {
         return [self::Cedula, self::TarjetaIdentidad, self::CedulaExtranjeria, self::PPT, self::pasaporte];
     }

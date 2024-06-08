@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('professional_card_number')->unique();
-            $table->text('academic_profile');
+            $table->text('academic_profile')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
