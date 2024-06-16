@@ -28,16 +28,16 @@ class PsychologistController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $result = $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
+        $request->validate([
+            'first-name' => ['required', 'string', 'max:255'],
             'last-name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:psychologists'],
             'document-type' => ['required', 'numeric', 'exists:document_types,id'],
             'identification-number' => ['required', 'numeric'],
             'professional-card-number' => ['required', 'string'],
         ], [
-            'first_name.required' => 'El campo nombre es obligatorio',
-
+            'first-name.required' => __('El campo nombre es obligatorio'),
+            'last-name.required' => __('El campo apellido es obligatorio'),
         ]);
 
 

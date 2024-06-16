@@ -29,7 +29,7 @@
                         <div class="sm:col-span-3">
                             <x-form.form-label for="first_name">{{ __('Nombres') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="first_name" id="first_name" autocomplete="first_name"/>
+                                <x-form.form-input type="text" name="first-name" id="first-name" autocomplete="first-name"/>
                                 <x-form.form-error name="first_name"/>
                             </div>
                         </div>
