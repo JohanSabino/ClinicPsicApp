@@ -38,6 +38,10 @@ class PsychologistController extends Controller
         ], [
             'first-name.required' => __('El campo nombre es obligatorio'),
             'last-name.required' => __('El campo apellido es obligatorio'),
+            'email.required' => __('El campo "correo electrónico" es obligatorio'),
+            'document-type.required' => __('El campo "tipo de documento" es obligatorio'),
+            'identification-number.required' => __('El campo "número de documento" es obligatorio'),
+            'professional-card-number.required' => __('El campo "número de tarjeta profesional" es obligatorio'),
         ]);
 
 

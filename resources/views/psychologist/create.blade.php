@@ -11,13 +11,6 @@
                 </div>
             </div>
         @endif
-        @if($errors->any())
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error  }}</li>
-                @endforeach
-            </ul>
-        @endif
         <form method="POST" action="{{ route('psychologist.store') }}">
             @csrf
             <div class="space-y-12">
@@ -30,7 +23,7 @@
                             <x-form.form-label for="first_name">{{ __('Nombres') }}</x-form.form-label>
                             <div class="mt-2">
                                 <x-form.form-input type="text" name="first-name" id="first-name" autocomplete="first-name"/>
-                                <x-form.form-error name="first_name"/>
+                                <x-form.form-error name="first-name"/>
                             </div>
                         </div>
 
