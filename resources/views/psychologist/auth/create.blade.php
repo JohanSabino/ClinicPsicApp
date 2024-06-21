@@ -35,7 +35,7 @@
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4">
+                        <div class="sm:col-span-6">
                             <x-form.form-label for="email">{{ __('Correo electrónico') }}</x-form.form-label>
                             <div class="mt-2">
                                 <x-form.form-input id="email" name="email" type="email" autocomplete="email"/>
@@ -65,11 +65,29 @@
                         </div>
 
 
-                        <div class="sm:col-span-3">
+                        <div class="sm:col-span-6">
                             <x-form.form-label for="professional-card-number">{{ __('Número de Tarjeta Profesional') }}</x-form.form-label>
                             <div class="mt-2">
                                 <x-form.form-input type="text" name="professional-card-number" id="professional-card-number" autocomplete="professional-card-number"/>
                                 <x-form.form-error name="professional-card-number"/>
+                            </div>
+                        </div>
+
+
+                        <div class="sm:col-span-3">
+                            <x-form.form-label for="password">{{ __('Contraseña') }}</x-form.form-label>
+                            <div class="mt-2">
+                                <x-form.form-input type="text" name="password" id="password" autocomplete="password"/>
+                                <x-form.form-error name="password"/>
+                            </div>
+                        </div>
+
+
+                        <div class="sm:col-span-3">
+                            <x-form.form-label for="password-confirmation">{{ __('Confirmación de contraseña') }}</x-form.form-label>
+                            <div class="mt-2">
+                                <x-form.form-input type="text" name="password-confirmation" id="password-confirmation" autocomplete="password-confirmation"/>
+                                <x-form.form-error name="password-confirmation"/>
                             </div>
                         </div>
                     </div>

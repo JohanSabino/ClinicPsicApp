@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
 
 
 /**
- *
+ * 
  *
  * @property string $uuid
  * @property string $name
@@ -42,6 +42,15 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @method static Builder|User whereUuid($value)
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @method static Builder|User onlyTrashed()
+ * @method static Builder|User whereFirstName($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereLastName($value)
+ * @method static Builder|User withTrashed()
+ * @method static Builder|User withoutTrashed()
  * @mixin Eloquent
  */
 class User extends Authenticatable

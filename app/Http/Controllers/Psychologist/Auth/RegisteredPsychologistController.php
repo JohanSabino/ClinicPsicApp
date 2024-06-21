@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Psychologist\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\DocumentType;
 use App\Models\Psychologist;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class PsychologistController extends Controller
+class RegisteredPsychologistController extends Controller
 {
     /**
      * @return View|Factory
@@ -18,7 +18,7 @@ class PsychologistController extends Controller
     public function create(): View|Factory
     {
         $documentTypes = DocumentType::psychologistDocumentTypes()->get();
-        return view('psychologist.create', ['documentTypes' => $documentTypes]);
+        return view('psychologist.auth.create', ['documentTypes' => $documentTypes]);
     }
 
     /**

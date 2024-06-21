@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PsychologistController;
+use App\Http\Controllers\Psychologist\Auth\RegisteredPsychologistController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::controller(PsychologistController::class)->group(function () {
+Route::controller(RegisteredPsychologistController::class)->group(function () {
     Route::get('/psychologist', 'create')->name('psychologist.create');
     Route::post('/psychologist', 'store')->name('psychologist.store');
 });
