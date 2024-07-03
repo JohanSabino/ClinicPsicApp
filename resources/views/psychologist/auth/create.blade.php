@@ -84,10 +84,10 @@
 
 
                         <div class="sm:col-span-3">
-                            <x-form.form-label for="password-confirmation">{{ __('Confirmación de contraseña') }}</x-form.form-label>
+                            <x-form.form-label for="password_confirmation">{{ __('Confirmación de contraseña') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="password-confirmation" id="password-confirmation" autocomplete="password-confirmation"/>
-                                <x-form.form-error name="password-confirmation"/>
+                                <x-form.form-input type="text" name="password_confirmation" id="password_confirmation" autocomplete="password_confirmation"/>
+                                <x-form.form-error name="password_confirmation"/>
                             </div>
                         </div>
                     </div>

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Psychologist\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePsychologistRequest;
 use App\Models\DocumentType;
 use App\Models\Psychologist;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisteredPsychologistController extends Controller
 {
@@ -23,28 +25,11 @@ class RegisteredPsychologistController extends Controller
 
     /**
      * Creates a new Psychologist
-     * @param Request $request
+     * @param StorePsychologistRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StorePsychologistRequest $request): RedirectResponse
     {
-        $request->validate([
-            'first-name' => ['required', 'string', 'max:255'],
-            'last-name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:psychologists'],
-            'document-type' => ['required', 'numeric', 'exists:document_types,id'],
-            'identification-number' => ['required', 'numeric'],
-            'professional-card-number' => ['required', 'string'],
-        ], [
-            'first-name.required' => __('El campo nombre es obligatorio'),
-            'last-name.required' => __('El campo apellido es obligatorio'),
-            'email.required' => __('El campo "correo electrónico" es obligatorio'),
-            'document-type.required' => __('El campo "tipo de documento" es obligatorio'),
-            'identification-number.required' => __('El campo "número de documento" es obligatorio'),
-            'professional-card-number.required' => __('El campo "número de tarjeta profesional" es obligatorio'),
-        ]);
-
-
         $psychologist = new Psychologist();
         $psychologist->first_name = $request->get('first-name');
         $psychologist->last_name = $request->get('last-name');
@@ -52,6 +37,7 @@ class RegisteredPsychologistController extends Controller
         $psychologist->document_type_id = $request->get('document-type');
         $psychologist->identification_number = $request->get('identification-number');
         $psychologist->professional_card_number = $request->get('professional-card-number');
+        $psychologist->password = Hash::make($request->get('password'));
         $psychologist->save();
 
         return redirect()->route('psychologist.create')->with('success', 'Psychologist created successfully');
