@@ -22,7 +22,7 @@
                         <div class="sm:col-span-3">
                             <x-form.form-label for="first_name">{{ __('Nombres') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="first-name" id="first-name" autocomplete="first-name"/>
+                                <x-form.form-input type="text" name="first-name" id="first-name" autocomplete="first-name" value="{{ old('first-name') }}"/>
                                 <x-form.form-error name="first-name"/>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                         <div class="sm:col-span-3">
                             <x-form.form-label for="last-name">{{ __('Apellidos') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="last-name" id="last-name" autocomplete="last-name"/>
+                                <x-form.form-input type="text" name="last-name" id="last-name" autocomplete="last-name" value="{{ old('last-name') }}"/>
                                 <x-form.form-error name="last-name"/>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="sm:col-span-6">
                             <x-form.form-label for="email">{{ __('Correo electrónico') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input id="email" name="email" type="email" autocomplete="email"/>
+                                <x-form.form-input id="email" name="email" type="email" autocomplete="email" value="{{ old('email') }}"/>
                                 <x-form.form-error name="email"/>
                             </div>
                         </div>
@@ -46,10 +46,10 @@
                         <div class="sm:col-span-3">
                             <x-form.form-label for="document-type">{{ __('Tipo de Documento') }}</x-form.form-label>
                             <div class="mt-2">
-                                <select id="document-type" name="document-type" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                <select id="document-type" name="document-type" autocomplete="document-type" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                     <option value="">-- Selecciona una opción --</option>
                                     @foreach($documentTypes as $documentType)
-                                        <option value="{{ $documentType->id }}">{{ $documentType->name }}</option>
+                                        <option value="{{ $documentType->id }}" {{ (int)old('document-type') === $documentType->id ? "selected" : '' }}>{{ $documentType->name }}</option>
                                     @endforeach
                                 </select>
                                 <x-form.form-error name="document-type"/>
@@ -59,7 +59,7 @@
                         <div class="sm:col-span-3">
                             <x-form.form-label for="identification-number">{{ __('Número de Documento') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="number" name="identification-number" id="identification-number" autocomplete="identification-number"/>
+                                <x-form.form-input type="number" name="identification-number" id="identification-number" autocomplete="identification-number" value="{{ old('identification-number') }}"/>
                                 <x-form.form-error name="identification-number"/>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                         <div class="sm:col-span-6">
                             <x-form.form-label for="professional-card-number">{{ __('Número de Tarjeta Profesional') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="professional-card-number" id="professional-card-number" autocomplete="professional-card-number"/>
+                                <x-form.form-input type="text" name="professional-card-number" id="professional-card-number" autocomplete="professional-card-number" value="{{ old('professional-card-number') }}"/>
                                 <x-form.form-error name="professional-card-number"/>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                         <div class="sm:col-span-3">
                             <x-form.form-label for="password">{{ __('Contraseña') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="password" id="password" autocomplete="password"/>
+                                <x-form.form-input type="password" name="password" id="password" autocomplete="password"/>
                                 <x-form.form-error name="password"/>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                         <div class="sm:col-span-3">
                             <x-form.form-label for="password_confirmation">{{ __('Confirmación de contraseña') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="password_confirmation" id="password_confirmation" autocomplete="password_confirmation"/>
+                                <x-form.form-input type="password" name="password_confirmation" id="password_confirmation" autocomplete="password_confirmation"/>
                                 <x-form.form-error name="password_confirmation"/>
                             </div>
                         </div>
