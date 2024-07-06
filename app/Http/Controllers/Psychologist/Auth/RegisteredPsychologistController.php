@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePsychologistRequest;
 use App\Models\DocumentType;
 use App\Models\Psychologist;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RegisteredPsychologistController extends Controller
@@ -19,8 +20,9 @@ class RegisteredPsychologistController extends Controller
      */
     public function create(): View|Factory
     {
-        $documentTypes = DocumentType::psychologistDocumentTypes()->get();
-        return view('psychologist.auth.create', ['documentTypes' => $documentTypes]);
+        return view('psychologist.auth.create', [
+            'documentTypes' => DocumentType::psychologistDocumentTypes()->get()
+        ]);
     }
 
     /**
@@ -40,6 +42,10 @@ class RegisteredPsychologistController extends Controller
         $psychologist->password = Hash::make($request->get('password'));
         $psychologist->save();
 
-        return redirect()->route('psychologist.create')->with('success', 'Psychologist created successfully');
+        event(new Registered($psychologist));
+
+        Auth::guard('psychologist')->login($psychologist);
+
+        return redirect()->route('psychologist.verification.notice')->with('success', __('Psicólogo creado con éxito!'));
     }
 }

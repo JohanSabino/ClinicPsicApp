@@ -3,14 +3,17 @@
 namespace App\Models;
 
 use Eloquent;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $uuid
@@ -45,11 +48,11 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Psychologist whereRememberToken($value)
  * @method static Builder|Psychologist whereUpdatedAt($value)
  * @method static Builder|Psychologist whereUuid($value)
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @mixin Eloquent
  */
-class Psychologist extends Authenticatable
+class Psychologist extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 

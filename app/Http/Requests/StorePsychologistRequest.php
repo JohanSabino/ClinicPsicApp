@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -18,7 +19,7 @@ class StorePsychologistRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -27,8 +28,8 @@ class StorePsychologistRequest extends FormRequest
             'last-name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:psychologists'],
             'document-type' => ['required', 'numeric', 'exists:document_types,id'],
-            'identification-number' => ['required', 'numeric'],
-            'professional-card-number' => ['required', 'string'],
+            'identification-number' => ['required', 'numeric', 'unique:psychologists,identification_number'],
+            'professional-card-number' => ['required', 'string', 'unique:psychologists,professional_card_number'],
             'password' => ['required', 'confirmed', Password::defaults()]
         ];
     }
