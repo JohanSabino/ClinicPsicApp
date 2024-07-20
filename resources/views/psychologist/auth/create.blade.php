@@ -68,7 +68,7 @@
                         <div class="sm:col-span-6">
                             <x-form.form-label for="professional-card-number">{{ __('Número de Tarjeta Profesional') }}</x-form.form-label>
                             <div class="mt-2">
-                                <x-form.form-input type="text" name="professional-card-number" id="professional-card-number" autocomplete="professional-card-number" value="{{ old('professional-card-number') }}"/>
+                                <x-form.form-input type="number" name="professional-card-number" id="professional-card-number" autocomplete="professional-card-number" value="{{ old('professional-card-number') }}"/>
                                 <x-form.form-error name="professional-card-number"/>
                             </div>
                         </div>

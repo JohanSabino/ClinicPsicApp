@@ -29,7 +29,7 @@ class StorePsychologistRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:psychologists'],
             'document-type' => ['required', 'numeric', 'exists:document_types,id'],
             'identification-number' => ['required', 'numeric', 'unique:psychologists,identification_number'],
-            'professional-card-number' => ['required', 'string', 'unique:psychologists,professional_card_number'],
+            'professional-card-number' => ['required', 'integer', 'regex:/^\d{5,6}$/', 'unique:psychologists,professional_card_number'],
             'password' => ['required', 'confirmed', Password::defaults()]
         ];
     }
@@ -46,6 +46,7 @@ class StorePsychologistRequest extends FormRequest
             'document-type.required' => __('El campo "tipo de documento" es obligatorio'),
             'identification-number.required' => __('El campo "número de documento" es obligatorio'),
             'professional-card-number.required' => __('El campo "número de tarjeta profesional" es obligatorio'),
+            'professional-card-number.regex' => __('El campo "número de tarjeta profesional" debe tener una longitud mínima de 5 y máxima de 6 caracteres.')
         ];
     }
 }
