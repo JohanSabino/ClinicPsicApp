@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Psychologist\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Psychologist\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Psychologist\Auth\VerifyEmailController;
 use App\Http\Controllers\Psychologist\Auth\EmailVerificationPromptController;
@@ -9,9 +10,17 @@ Route::get('/psychologist/dashboard', function () {
     return view('psychologist.dashboard.dashboard');
 })->middleware(['auth:psychologist', 'verified'])->name('psychologist.dashboard');
 
-Route::controller(RegisteredPsychologistController::class)->group(function () {
-    Route::get('/psychologist', 'create')->name('psychologist.create');
-    Route::post('/psychologist', 'store')->name('psychologist.store');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/psychologist', [RegisteredPsychologistController::class, 'create'])
+        ->name('psychologist.create');
+
+    Route::post('/psychologist', [RegisteredPsychologistController::class, 'store'])
+        ->name('psychologist.store');
+
+    Route::get('/psychologist/login', [AuthenticatedSessionController::class, 'create'])
+        ->name('psychologist.login');
+
+    Route::post('/psychologist/login', [AuthenticatedSessionController::class, 'store']);
 });
 
 Route::middleware(['auth:psychologist'])->prefix('/psychologist')->group(function () {
@@ -20,9 +29,13 @@ Route::middleware(['auth:psychologist'])->prefix('/psychologist')->group(functio
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
+        ->name('psychologist.verification.verify');
 
     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
         ->middleware('throttle:6,1')
-        ->name('verification.send');
+        ->name('psychologist.verification.send');
+
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->name('psychologist.logout');
+
 });

@@ -43,6 +43,11 @@
                 <li class="mr-3">
                     <x-nav-link href="#">link 3</x-nav-link>
                 </li>
+                <li class="mr-3">
+                    <x-nav-link href="{{ route('psychologist.login') }}">
+                        Psychologist Login
+                    </x-nav-link>
+                </li>
             </ul>
             <a
                 id="navAction"
