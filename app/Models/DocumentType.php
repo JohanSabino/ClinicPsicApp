@@ -10,13 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 /**
- *
- *
  * @property int $id
  * @property string $name
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static DocumentTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|DocumentType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DocumentType newQuery()
@@ -27,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|DocumentType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DocumentType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DocumentType whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class DocumentType extends Model
@@ -35,8 +35,6 @@ class DocumentType extends Model
 
     /**
      * Get psychologist document types
-     * @param Builder $query
-     * @return void
      */
     public function scopePsychologistDocumentTypes(Builder $query): void
     {

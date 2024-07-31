@@ -17,11 +17,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        Auth::guard('psychologist')->logout();
         return view('psychologist.auth.login');
     }
 
     /**
      * Handle an incoming authentication request.
+     *
      * @throws ValidationException
      */
     public function store(LoginRequest $request): RedirectResponse

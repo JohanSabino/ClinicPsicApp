@@ -52,7 +52,7 @@
                 Con {{ config('app.name', 'Laravel') }} Puedes:
             </h2>
             <div class="w-full mb-4">
-                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                <div class="h-1 mx-auto background-clinic-gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
             <div class="flex flex-wrap">
                 <div class="w-5/6 sm:w-1/2 p-6">
@@ -103,7 +103,7 @@
                 Pricing
             </h2>
             <div class="w-full mb-4">
-                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+                <div class="h-1 mx-auto background-clinic-gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
             <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
                 <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
@@ -124,7 +124,7 @@
                         </div>
                         <div class="flex items-center justify-center">
                             <button
-                                class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                class="mx-auto lg:mx-0 hover:underline background-clinic-gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                 Sign Up
                             </button>
                         </div>
@@ -133,7 +133,7 @@
                 <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
                     <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                         <div class="w-full p-8 text-3xl font-bold text-center">Basic</div>
-                        <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
+                        <div class="h-1 w-full background-clinic-gradient my-0 py-0 rounded-t"></div>
                         <ul class="w-full text-center text-base font-bold">
                             <li class="border-b py-4">Thing</li>
                             <li class="border-b py-4">Thing</li>
@@ -148,7 +148,7 @@
                         </div>
                         <div class="flex items-center justify-center">
                             <button
-                                class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                class="mx-auto lg:mx-0 hover:underline background-clinic-gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                 Sign Up
                             </button>
                         </div>
@@ -172,7 +172,7 @@
                         </div>
                         <div class="flex items-center justify-center">
                             <button
-                                class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                class="mx-auto lg:mx-0 hover:underline background-clinic-gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                 Sign Up
                             </button>
                         </div>

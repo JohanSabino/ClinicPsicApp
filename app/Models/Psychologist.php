@@ -13,8 +13,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
 /**
- *
- *
  * @property int $id
  * @property string $uuid
  * @property int $document_type_id
@@ -30,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static Builder|Psychologist newModelQuery()
  * @method static Builder|Psychologist newQuery()
  * @method static Builder|Psychologist query()
@@ -48,8 +47,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Psychologist whereRememberToken($value)
  * @method static Builder|Psychologist whereUpdatedAt($value)
  * @method static Builder|Psychologist whereUuid($value)
+ *
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ *
  * @mixin Eloquent
  */
 class Psychologist extends Authenticatable implements MustVerifyEmail

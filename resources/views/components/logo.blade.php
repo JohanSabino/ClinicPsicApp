@@ -18,5 +18,5 @@
                   d="M15.5 7.5c.802.304 1.862 1.43 2 2"/>
         </g>
     </svg>
-    {{ config('app.name', 'Laravel') }}
+    {{ config('app.name', 'Laravel') }} @isset($complement)- {{ $complement }} @endisset
 </a>

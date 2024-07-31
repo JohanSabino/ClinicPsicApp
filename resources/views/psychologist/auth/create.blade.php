@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-psychologist-guest-layout>
     <div class="container pt-24 px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center h-full">
         @if(Session::exists('success'))
             <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
@@ -105,4 +105,4 @@
         </form>
 
     </div>
-</x-guest-layout>
+</x-psychologist-guest-layout>

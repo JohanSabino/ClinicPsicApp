@@ -15,24 +15,19 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisteredPsychologistController extends Controller
 {
-    /**
-     * @return View|Factory
-     */
     public function create(): View|Factory
     {
         return view('psychologist.auth.create', [
-            'documentTypes' => DocumentType::psychologistDocumentTypes()->get()
+            'documentTypes' => DocumentType::psychologistDocumentTypes()->get(),
         ]);
     }
 
     /**
      * Creates a new Psychologist
-     * @param StorePsychologistRequest $request
-     * @return RedirectResponse
      */
     public function store(StorePsychologistRequest $request): RedirectResponse
     {
-        $psychologist = new Psychologist();
+        $psychologist = new Psychologist;
         $psychologist->first_name = $request->get('first-name');
         $psychologist->last_name = $request->get('last-name');
         $psychologist->email = $request->get('email');

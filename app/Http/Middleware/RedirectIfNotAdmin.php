@@ -11,13 +11,14 @@ class RedirectIfNotAdmin
     /**
      * Handle an incoming request.
      *
-     * @param Closure(Request): (Response) $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next, $guard = 'admin'): Response
     {
-        if (!auth()->guard($guard)->check()) {
+        if (! auth()->guard($guard)->check()) {
             return redirect()->route('admin.login');
         }
+
         return $next($request);
     }
 }

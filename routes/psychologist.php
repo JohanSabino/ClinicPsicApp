@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Psychologist\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Psychologist\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Psychologist\Auth\VerifyEmailController;
 use App\Http\Controllers\Psychologist\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Psychologist\Auth\RegisteredPsychologistController;
+use App\Http\Controllers\Psychologist\Auth\VerifyEmailController;
 
 Route::get('/psychologist/dashboard', function () {
     return view('psychologist.dashboard.dashboard');

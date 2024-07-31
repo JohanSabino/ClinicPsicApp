@@ -36,6 +36,7 @@ enum DocumentType: int
 
     /**
      * document types used for psychologist
+     *
      * @return DocumentType[]
      */
     public static function psychologists(): array
@@ -45,6 +46,7 @@ enum DocumentType: int
 
     /**
      * document types for psychologist
+     *
      * @return DocumentType[]
      */
     public static function patients(): array

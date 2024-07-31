@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Psychologist\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Psychologist\Auth\RegisteredPsychologistController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');

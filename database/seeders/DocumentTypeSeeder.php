@@ -13,19 +13,19 @@ class DocumentTypeSeeder extends Seeder
     public function run(): void
     {
         DocumentType::factory()->create([
-            'name' => 'Cédula'
+            'name' => 'Cédula',
         ]);
         DocumentType::factory()->create([
-            'name' => 'Tarjeta de identidad'
+            'name' => 'Tarjeta de identidad',
         ]);
         DocumentType::factory()->create([
-            'name' => 'Cédula de extranjería'
+            'name' => 'Cédula de extranjería',
         ]);
         DocumentType::factory()->create([
-            'name' => 'PPT'
+            'name' => 'PPT',
         ]);
         DocumentType::factory()->create([
-            'name' => 'pasaporte'
+            'name' => 'pasaporte',
         ]);
     }
 }

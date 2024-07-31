@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-psychologist-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('¡Gracias por registrarte! Antes de comenzar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que te acabamos de enviar? Si no recibiste el correo electrónico, con gusto te enviaremos otro.') }}
     </div>
@@ -28,4 +28,4 @@
             </button>
         </form>
     </div>
-</x-guest-layout>
+</x-psychologist-guest-layout>
