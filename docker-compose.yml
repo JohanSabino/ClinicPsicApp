@@ -19,7 +19,7 @@ services:
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
         volumes:
             - '.:/var/www/html'
-            - '/home/luispaloma/Proyectos/clinic-planner-app/docker/20-xdebug.ini:/etc/php/8.3/cli/conf.d/20-xdebug.ini'
+            - './docker/20-xdebug.ini:/etc/php/8.3/cli/conf.d/20-xdebug.ini'
         networks:
             - sail
         depends_on:
@@ -31,7 +31,7 @@ services:
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+            - '${FORWARD_DB_PORT:-3307}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: '%'
