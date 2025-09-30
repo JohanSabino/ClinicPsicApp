@@ -63,8 +63,14 @@ class Psychologist extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'document_type_id',
+        'identification_number',
+        'first_name',
+        'last_name',
+        'professional_card_number',
+        'academic_profile',
         'email',
+        'email_verified_at',
         'password',
     ];
 
@@ -79,7 +85,7 @@ class Psychologist extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
      * @return array<string, string>
      */
