@@ -3,8 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+<<<<<<< HEAD
 use App\Models\Psychologist;
 use App\Models\DocumentType;
+=======
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+>>>>>>> origin/master
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,10 +19,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+<<<<<<< HEAD
         // 1️⃣ Seeder de tipos de documento
         $this->call(DocumentTypeSeeder::class);
 
         // 2️⃣ Usuario Admin
+=======
+        // User::factory(10)->create();
+
+>>>>>>> origin/master
         User::factory()->create([
             'first_name' => 'Admin',
             'last_name' => 'Admin Last name',
@@ -26,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password123'),
         ]);
 
+<<<<<<< HEAD
         // 3️⃣ Psychologist Admin
         $documentType = DocumentType::firstOrCreate(['name' => 'Cédula']);
 
@@ -42,3 +52,8 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+=======
+        $this->call(DocumentTypeSeeder::class);
+    }
+}
+>>>>>>> origin/master

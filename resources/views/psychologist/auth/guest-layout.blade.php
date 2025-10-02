@@ -22,7 +22,11 @@
                 </a>
             </div>
 
+<<<<<<< HEAD
             <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+=======
+            <div class="w-full sm:max-w-4xl mt-6 px-8 py-8 bg-white shadow-lg overflow-hidden sm:rounded-xl border border-gray-100">
+>>>>>>> origin/master
                 {{ $slot }}
             </div>
         </div>

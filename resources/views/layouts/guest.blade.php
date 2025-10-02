@@ -22,7 +22,13 @@
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-xl mt-6 px-8 py-8 bg-white shadow-lg overflow-hidden sm:rounded-xl border border-gray-100">
+                <!-- Header del formulario -->
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Bienvenido a Clinic PsicApp</h2>
+                    <p class="text-gray-600 text-sm">Ingresa tus credenciales para acceder al sistema</p>
+                </div>
+                
                 {{ $slot }}
             </div>
         </div>

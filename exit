@@ -1,0 +1,107 @@
+[33mcommit b6613c8c053fd31925634dd1bd9727e07e547c6e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: JohanSabino <jasc9494@gmail.com>
+Date:   Mon Sep 29 20:07:09 2025 -0500
+
+    Hotfix - Factories & migration seeder
+
+[33mcommit e0e4c0e61a13492ab4abf9c8a94488772d50814f[m
+Author: JohanSabino <jasc9494@gmail.com>
+Date:   Sun Sep 28 14:53:32 2025 -0500
+
+    Versión inicial del nuevo proyecto ClinicPsicApp
+
+[33mcommit aaf5cd2a22022bd81ba0b1fb6281a8307a17e23e[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Wed Jul 31 18:36:34 2024 -0500
+
+    fixed cod quality by using laravel pin
+
+[33mcommit e1cbcbb6ca17219bbec5c76250eb598b54a0a87e[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Mon Jul 29 16:19:34 2024 -0500
+
+    added new route for psychologist
+
+[33mcommit 4a54f3fc3488ee83e90e1d24e0578935338ee6bf[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Fri Jul 19 22:11:00 2024 -0500
+
+    added new rule to validate professional card number length
+
+[33mcommit 4d659e3953439fac364469b3da6e6c465c3e66cf[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Fri Jul 5 21:36:14 2024 -0500
+
+    verification process implemented
+
+[33mcommit ba4cc1f5727cb441cdf269ffe87eaa348cbe1286[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Thu Jul 4 15:15:31 2024 -0500
+
+    fixed buttons text
+
+[33mcommit 3c0f2979e4684943d9ee5dd91d6d94235dc366a4[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Thu Jul 4 15:09:00 2024 -0500
+
+    fixed form issues when an error occours
+
+[33mcommit 8172f8388bb2bed029b816e7a3b5e849177c2f96[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Tue Jul 2 21:44:41 2024 -0500
+
+    updated the way we are creating the psychologist
+
+[33mcommit 2eefbd781e36f63f9fe0466f68deb97f8fb6c69e[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Thu Jun 20 21:57:33 2024 -0500
+
+    folder structure updated, added password and password confirmation to the form
+
+[33mcommit e3f9ce586830a740de2dc7194f2616b86355abf9[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Sun Jun 16 15:19:57 2024 -0500
+
+    fix issue with field name
+
+[33mcommit 257300e5015c01bd97bef14e2e69ad533a0bcd13[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Sun Jun 16 13:59:32 2024 -0500
+
+    fix issue with field name
+
+[33mcommit f79b4b8a77c3583d37987240245e79567a8e86d2[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Sat Jun 8 12:43:51 2024 -0500
+
+    fix migrations and seeder
+
+[33mcommit 037242be85563bfdeaec76f5b0c073e94eaf24a9[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Mon Jun 3 22:57:45 2024 -0500
+
+    fix migrations and seeder
+
+[33mcommit ba606eed7a3bb1fc4a9e86c671414eee52f813a9[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Sat Jun 1 15:52:38 2024 -0500
+
+    db build including factories, migrations, models, and also part of the home page and suscription functionality
+
+[33mcommit 7b4017a926f7a6fdb92e5e868d39d28558e4aac2[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Sun May 5 23:35:48 2024 -0500
+
+    added softdelete trait to user model
+
+[33mcommit 3fe07a50173da68d581c8675ef63b0ccf436ed22[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Sun May 5 23:19:10 2024 -0500
+
+    creating db schema and testing admin access
+
+[33mcommit 3ccf93e69ca9de24b520e8be2ae6c3261887bed6[m
+Author: Luis Palomá <luispaloma3@gmail.com>
+Date:   Mon Apr 29 21:43:42 2024 -0500
+
+    first commit
