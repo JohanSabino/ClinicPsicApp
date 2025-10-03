@@ -64,13 +64,10 @@ return [
     */
 
     'providers' => [
-<<<<<<< HEAD
-=======
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
->>>>>>> origin/master
         'admins' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
@@ -79,14 +76,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Psychologist::class,
         ],
-<<<<<<< HEAD
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-=======
->>>>>>> origin/master
     ],
 
     /*
