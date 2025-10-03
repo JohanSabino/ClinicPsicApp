@@ -12,7 +12,4 @@ export default defineConfig({
         }),
     ],
 });
-<<<<<<< HEAD
-=======
     
->>>>>>> origin/master
