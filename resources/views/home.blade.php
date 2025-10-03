@@ -32,7 +32,7 @@
                     </div>
                     
                     <!-- Stats o badges -->
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-6 mt-8">
+                    {{-- <div class="flex flex-wrap justify-center lg:justify-start gap-6 mt-8">
                         <div class="text-center">
                             <div class="text-2xl sm:text-3xl font-bold text-white">500+</div>
                             <div class="text-xs sm:text-sm text-white/70">Psicólogos</div>
@@ -45,7 +45,7 @@
                             <div class="text-2xl sm:text-3xl font-bold text-white">50K+</div>
                             <div class="text-xs sm:text-sm text-white/70">Consultas</div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 
                 <!--Right Col - Image-->

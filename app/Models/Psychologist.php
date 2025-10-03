@@ -11,6 +11,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Laravel\Sanctum\HasApiTokens; 
 
 /**
  * @property int $id
@@ -55,7 +56,7 @@ use Illuminate\Support\Carbon;
  */
 class Psychologist extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens; 
 
     /**
      * The attributes that are mass assignable.
@@ -63,7 +64,6 @@ class Psychologist extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-
         'document_type_id',
         'identification_number',
         'first_name',
@@ -72,10 +72,7 @@ class Psychologist extends Authenticatable implements MustVerifyEmail
         'academic_profile',
         'email',
         'email_verified_at',
-
         'name',
-        'email',
-
         'password',
     ];
 
@@ -90,11 +87,7 @@ class Psychologist extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-
-     * The attributes that should be cast.
-
      * Get the attributes that should be cast.
-
      *
      * @return array<string, string>
      */
@@ -105,5 +98,4 @@ class Psychologist extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-
 }
