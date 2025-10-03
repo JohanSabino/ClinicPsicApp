@@ -107,6 +107,3 @@ class Psychologist extends Authenticatable implements MustVerifyEmail
     }
 
 }
-
-}
-
