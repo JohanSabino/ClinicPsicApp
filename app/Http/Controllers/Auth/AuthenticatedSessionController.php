@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
+
 use App\Http\Requests\Psychologist\Auth\LoginRequest;
-=======
+
 use App\Http\Requests\Auth\LoginRequest;
->>>>>>> origin/master
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +28,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-<<<<<<< HEAD
+
                 
-=======
->>>>>>> origin/master
+
+
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -52,8 +52,8 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
-<<<<<<< HEAD
+
 }
-=======
+
 }
->>>>>>> origin/master
+
