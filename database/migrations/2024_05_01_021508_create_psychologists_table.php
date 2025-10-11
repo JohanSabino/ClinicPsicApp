@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('professional_card_number')->unique();
             $table->text('academic_profile')->nullable();
+            
+            // CAMPOS NUEVOS PARA EL PERFIL
+            $table->string('profile_photo')->nullable(); // Foto de perfil
+            $table->string('specialty')->nullable(); // Especialidad
+            $table->string('phone')->nullable(); // Teléfono
+            
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();

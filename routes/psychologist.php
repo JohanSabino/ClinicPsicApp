@@ -1,41 +1,44 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Psychologist\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Psychologist\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Psychologist\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Psychologist\Auth\RegisteredPsychologistController;
 use App\Http\Controllers\Psychologist\Auth\VerifyEmailController;
 
-Route::get('/psychologist/dashboard', function () {
-    return view('psychologist.dashboard.dashboard');
-})->middleware(['auth:psychologist', 'verified'])->name('psychologist.dashboard');
+/*
+|--------------------------------------------------------------------------
+| Rutas de Autenticación de Psicólogos
+|--------------------------------------------------------------------------
+*/
 
-Route::middleware(['guest'])->group(function () {
-    Route::get('/psychologist', [RegisteredPsychologistController::class, 'create'])
-        ->name('psychologist.create');
+// Rutas de registro y login (solo para invitados)
+Route::middleware('guest')->prefix('psychologist')->name('psychologist.')->group(function () {
+    Route::get('register', [RegisteredPsychologistController::class, 'create'])
+        ->name('register');
+    Route::post('register', [RegisteredPsychologistController::class, 'store']);
 
-    Route::post('/psychologist', [RegisteredPsychologistController::class, 'store'])
-        ->name('psychologist.store');
-
-    Route::get('/psychologist/login', [AuthenticatedSessionController::class, 'create'])
-        ->name('psychologist.login');
-
-    Route::post('/psychologist/login', [AuthenticatedSessionController::class, 'store']);
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+        ->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
-Route::middleware(['auth:psychologist'])->prefix('/psychologist')->group(function () {
+// Rutas protegidas (solo para psicólogos autenticados)
+Route::middleware('auth')->prefix('psychologist')->name('psychologist.')->group(function () {
+    // Verificación de email
     Route::get('verify-email', EmailVerificationPromptController::class)
-        ->name('psychologist.verification.notice');
+        ->name('verification.notice');
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
-        ->name('psychologist.verification.verify');
+        ->name('verification.verify');
 
     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
         ->middleware('throttle:6,1')
-        ->name('psychologist.verification.send');
+        ->name('verification.send');
 
+    // Logout
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('psychologist.logout');
-
+        ->name('logout');
 });

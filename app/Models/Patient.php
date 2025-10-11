@@ -37,4 +37,14 @@ class Patient extends Model
     ];
 
     protected $dates = ['deleted_at'];
+    public function appointments()
+{
+    return $this->hasMany(Appointment::class);
+}
+
+public function clinicHistories()
+{
+    return $this->hasMany(ClinicHistory::class);
+}
+
 }

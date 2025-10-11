@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Psychologist\Auth;
 
 use App\Http\Controllers\Controller;
@@ -8,32 +9,52 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Psychologist;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
     // --- WEB ---
-    public function create()
+
+    /**
+     * Mostrar el formulario de login
+     */
+    public function create(): View
     {
-        Auth::guard('psychologist')->logout();
         return view('psychologist.auth.login');
     }
 
-    public function store(LoginRequest $request)
+    /**
+     * Procesar login web del psicólogo.
+     */
+   public function store(LoginRequest $request): RedirectResponse 
     {
         $request->authenticate();
+
         $request->session()->regenerate();
-        return redirect()->intended(route('psychologist.dashboard', absolute: false));
+
+        return redirect()->intended(route('dashboard'));
     }
 
-    public function destroy(Request $request)
+    /**
+     * Cerrar sesión web del psicólogo.
+     */
+    public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('psychologist')->logout();
+        Auth::guard('web')->logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 
     // --- API ---
+
+    /**
+     * Login vía API y generación de token.
+     */
     public function apiLogin(Request $request): JsonResponse
     {
         $request->validate([
@@ -54,11 +75,14 @@ class AuthenticatedSessionController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'user' => $psychologist,
+            'user' => $psychologist->only(['id', 'first_name', 'last_name', 'email']),
             'token' => $token
         ], 200);
     }
 
+    /**
+     * Cerrar sesión vía API (eliminar token).
+     */
     public function apiLogout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
@@ -69,11 +93,14 @@ class AuthenticatedSessionController extends Controller
         ], 200);
     }
 
+    /**
+     * Obtener información del psicólogo autenticado vía API.
+     */
     public function apiMe(Request $request): JsonResponse
     {
         return response()->json([
             'status' => 'success',
-            'user' => $request->user()
+            'user' => $request->user()->only(['id', 'first_name', 'last_name', 'email'])
         ], 200);
     }
 }

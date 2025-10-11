@@ -1,6 +1,9 @@
 <x-web-layout>
     <!--Hero Section-->
-    <div class="pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16">
+   <div class="pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16
+            background-clinic-gradient">
+
+
         <div class="container px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
                 <!--Left Col - Content-->
@@ -32,7 +35,7 @@
                     </div>
                     
                     <!-- Stats o badges -->
-                    {{-- <div class="flex flex-wrap justify-center lg:justify-start gap-6 mt-8">
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-6 mt-8">
                         <div class="text-center">
                             <div class="text-2xl sm:text-3xl font-bold text-white">500+</div>
                             <div class="text-xs sm:text-sm text-white/70">Psicólogos</div>
@@ -45,7 +48,7 @@
                             <div class="text-2xl sm:text-3xl font-bold text-white">50K+</div>
                             <div class="text-xs sm:text-sm text-white/70">Consultas</div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
                 
                 <!--Right Col - Image-->

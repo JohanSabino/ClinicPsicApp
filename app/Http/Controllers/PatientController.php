@@ -4,38 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
 
 class PatientController extends Controller
 {
-    public function index(): JsonResponse
+    /* ==============================================
+       VISTAS
+    ============================================== */
+
+    // Mostrar la vista de todos los pacientes
+    public function indexView()
     {
         $patients = Patient::all();
-        return response()->json([
-            'status' => 'success',
-            'data' => $patients
-        ], 200);
+        return view('patients.index', compact('patients'));
     }
 
-    public function show($id): JsonResponse
+    // Mostrar formulario para crear paciente
+    public function create()
     {
-        $patient = Patient::find($id);
-
-        if (!$patient) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Paciente no encontrado'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $patient
-        ], 200);
+        return view('patients.create');
     }
 
-    public function store(Request $request): JsonResponse
+    // Mostrar formulario para editar paciente
+    public function edit($id)
+    {
+        $patient = Patient::findOrFail($id);
+        return view('patients.edit', compact('patient'));
+    }
+
+    // Mostrar detalles de un paciente
+    public function showView($id)
+    {
+        $patient = Patient::findOrFail($id);
+        return view('patients.show', compact('patient'));
+    }
+
+    /* ==============================================
+       ACCIONES (POST/PUT/DELETE)
+    ============================================== */
+
+    public function store(Request $request)
     {
         $request->validate([
             'document_type_id' => 'required|integer',
@@ -57,22 +65,12 @@ class PatientController extends Controller
 
         $patient = Patient::create($request->all());
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $patient
-        ], 201);
+        return redirect()->route('patients.index')->with('success', 'Paciente creado correctamente.');
     }
 
-    public function update(Request $request, $id): JsonResponse
+    public function update(Request $request, $id)
     {
-        $patient = Patient::find($id);
-
-        if (!$patient) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Paciente no encontrado'
-            ], 404);
-        }
+        $patient = Patient::findOrFail($id);
 
         $request->validate([
             'document_type_id' => 'sometimes|required|integer',
@@ -94,28 +92,35 @@ class PatientController extends Controller
 
         $patient->update($request->all());
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $patient
-        ], 200);
+        return redirect()->route('patients.index')->with('success', 'Paciente actualizado correctamente.');
     }
 
-    public function destroy($id): JsonResponse
+    public function destroy($id)
+    {
+        $patient = Patient::findOrFail($id);
+        $patient->delete();
+
+        return redirect()->route('patients.index')->with('success', 'Paciente eliminado correctamente.');
+    }
+
+    /* ==============================================
+       API (JSON)
+    ============================================== */
+
+    public function indexApi()
+    {
+        $patients = Patient::all();
+        return response()->json(['status' => 'success', 'data' => $patients], 200);
+    }
+
+    public function showApi($id)
     {
         $patient = Patient::find($id);
 
         if (!$patient) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Paciente no encontrado'
-            ], 404);
+            return response()->json(['status' => 'error', 'message' => 'Paciente no encontrado'], 404);
         }
 
-        $patient->delete();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Paciente eliminado correctamente'
-        ], 200);
+        return response()->json(['status' => 'success', 'data' => $patient], 200);
     }
 }
