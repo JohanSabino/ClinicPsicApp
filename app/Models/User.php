@@ -13,6 +13,8 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Auth\Notifications\ResetPassword;
+
 
 /**
  * @property string $id
@@ -63,9 +65,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+    'first_name',
+    'last_name',
+    'email',
+    'password',
     ];
 
     /**
@@ -89,5 +92,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function getNameAttribute(): string
+        {
+            return "{$this->first_name} {$this->last_name}";
+        }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

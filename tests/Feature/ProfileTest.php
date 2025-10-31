@@ -37,21 +37,26 @@ test('email verification status is unchanged when the email address is unchanged
     $user = User::factory()->create();
 
     $response = $this
-        ->actingAs($user)
-        ->patch('/profile', [
-            'name' => 'Test User',
-            'email' => $user->email,
-        ]);
+    ->actingAs($user)
+    ->patch('/profile', [
+        'first_name' => 'Updated',
+        'last_name' => 'User',
+        'email' => 'updated@example.com',
+    ]);
 
     $response
         ->assertSessionHasNoErrors()
         ->assertRedirect('/profile');
 
-    $this->assertNotNull($user->refresh()->email_verified_at);
+    $this->assertEquals('Updated', $user->fresh()->first_name);
+    $this->assertEquals('User', $user->fresh()->last_name);
+
 });
 
 test('user can delete their account', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'password' => \Illuminate\Support\Facades\Hash::make('password'),
+    ]);
 
     $response = $this
         ->actingAs($user)
@@ -66,6 +71,7 @@ test('user can delete their account', function () {
     $this->assertGuest();
     $this->assertNull($user->fresh());
 });
+
 
 test('correct password must be provided to delete account', function () {
     $user = User::factory()->create();

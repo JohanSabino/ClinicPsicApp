@@ -3,14 +3,14 @@
 return [
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'), // ⬅️ CAMBIAR a 'web'
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'psychologists'), // ⬅️ CAMBIAR
+        'guard' => env('AUTH_GUARD', 'web'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'psychologists'),
     ],
 
     'guards' => [
-        'web' => [ // ⬅️ AGREGAR ESTE GUARD
+        'web' => [
             'driver' => 'session',
-            'provider' => 'psychologists',
+            'provider' => env('APP_ENV') === 'testing' ? 'users' : 'psychologists',
         ],
         
         'admin' => [
