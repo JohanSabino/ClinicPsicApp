@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\Route;
 // Home
 Route::view('/', 'home')->name('home');
 
-// Dashboard
+// Dashboard (psicólogo)
 Route::get('/dashboard', function () {
     return view('psychologist.dashboard.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+->middleware(['auth:psychologist', 'verified'])
+->name('dashboard');
 
-// Rutas protegidas
-Route::middleware(['auth', 'verified'])->group(function () {
+// Rutas protegidas para psicólogos
+Route::middleware(['auth:psychologist', 'verified'])->group(function () {
     
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,5 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 });
 
+// Rutas del módulo de psicólogos
 require __DIR__.'/psychologist.php';
+
+// Rutas de auth estándar (si existen)
 require __DIR__.'/auth.php';

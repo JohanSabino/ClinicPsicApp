@@ -3,21 +3,21 @@
 return [
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'psychologists'),
+        'guard' => 'web',
+        'passwords' => 'users',
     ],
 
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => env('APP_ENV') === 'testing' ? 'users' : 'psychologists',
+            'provider' => 'users',
         ],
-        
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        
+
         'psychologist' => [
             'driver' => 'session',
             'provider' => 'psychologists',
@@ -29,10 +29,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
+
         'psychologists' => [
             'driver' => 'eloquent',
             'model' => App\Models\Psychologist::class,
@@ -46,14 +43,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        
-        'admins' => [
-            'provider' => 'admins',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-        
+
         'psychologists' => [
             'provider' => 'psychologists',
             'table' => 'password_reset_tokens',
@@ -62,6 +52,6 @@ return [
         ],
     ],
 
-    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+    'password_timeout' => 10800,
 
 ];

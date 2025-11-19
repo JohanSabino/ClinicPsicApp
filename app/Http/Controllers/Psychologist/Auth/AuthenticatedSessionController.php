@@ -28,9 +28,16 @@ class AuthenticatedSessionController extends Controller
     /**
      * Procesar login web del psicólogo.
      */
-   public function store(LoginRequest $request): RedirectResponse 
+   public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
+
+        // AUTENTICACIÓN CORRECTA PARA PSICÓLOGOS
+        if (!Auth::guard('psychologist')->attempt($credentials, $request->boolean('remember'))) {
+            throw ValidationException::withMessages([
+                'email' => __('Las credenciales proporcionadas no coinciden con nuestros registros.'),
+            ]);
+        }
 
         $request->session()->regenerate();
 
@@ -42,7 +49,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard('psychologist')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

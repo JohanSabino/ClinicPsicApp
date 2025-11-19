@@ -29,8 +29,11 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        // ⬅️ CAMBIAR: quitar el guard específico
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        // AUTENTICAR SOLO CONTRA LA TABLA "psychologists"
+        if (! Auth::guard('psychologist')->attempt(
+            $this->only('email', 'password'),
+            $this->boolean('remember')
+        )) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -40,6 +43,7 @@ class LoginRequest extends FormRequest
 
         RateLimiter::clear($this->throttleKey());
     }
+
 
     public function ensureIsNotRateLimited(): void
     {
