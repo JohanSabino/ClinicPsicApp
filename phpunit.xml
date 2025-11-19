@@ -19,7 +19,7 @@
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
-        <env name="APP_KEY" value="base64:5sCZOj9xJHI84WqjPNCHSxWBApSNNvCNTl7kVVfopq8="/>
+        <env name="APP_KEY" value="base64:testkey1234567890testtest1234567890=" />
         <env name="MAIL_MAILER" value="array"/>
         <env name="MAIL_FROM_ADDRESS" value="test@example.com"/>
         <env name="MAIL_FROM_NAME" value="ClinicPsicApp Test"/>
