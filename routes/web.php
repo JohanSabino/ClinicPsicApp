@@ -5,6 +5,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClinicHistoriesController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Psychologist\PsychologistController; // ← FALTABA ESTA
 use Illuminate\Support\Facades\Route;
 
 // Home
@@ -25,7 +26,7 @@ Route::middleware(['auth:psychologist', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Pacientes (Vistas)
+    // Pacientes
     Route::get('/patients', [PatientController::class, 'indexView'])->name('patients.index');
     Route::get('/patients/create', [PatientController::class, 'create'])->name('patients.create');
     Route::post('/patients', [PatientController::class, 'store'])->name('patients.store');
@@ -34,7 +35,10 @@ Route::middleware(['auth:psychologist', 'verified'])->group(function () {
     Route::put('/patients/{id}', [PatientController::class, 'update'])->name('patients.update');
     Route::delete('/patients/{id}', [PatientController::class, 'destroy'])->name('patients.destroy');
 
-    // Citas/Agenda (Vistas)
+    // Psicólogos
+    Route::get('/psychologist/all', [PsychologistController::class, 'all']);
+
+    // Citas
     Route::resource('appointments', AppointmentController::class);
 
     // Historias clínicas

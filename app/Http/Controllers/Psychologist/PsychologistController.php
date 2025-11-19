@@ -14,15 +14,10 @@ class PsychologistController extends Controller
     /**
      * Listar todos los psicólogos
      */
-    public function index(): JsonResponse
-    {
-        $psychologists = Psychologist::all();
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $psychologists
-        ], 200);
-    }
+   public function index(): JsonResponse
+        {
+            return response()->json(Psychologist::all(), 200);
+        }
 
     /**
      * Mostrar un psicólogo específico
@@ -140,4 +135,9 @@ class PsychologistController extends Controller
             'message' => 'Psicólogo eliminado correctamente'
         ], 200);
     }
+    public function all(): JsonResponse
+    {
+        return response()->json(Psychologist::all(), 200);
+    }
+
 }
