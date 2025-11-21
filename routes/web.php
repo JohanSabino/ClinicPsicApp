@@ -7,16 +7,18 @@ use App\Http\Controllers\ClinicHistoriesController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Psychologist\PsychologistController; // ← FALTABA ESTA
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TherapySessionController;
+use App\Http\Controllers\Psychologist\PsychologistDashboardController;
 
 // Home
 Route::view('/', 'home')->name('home');
 
 // Dashboard (psicólogo)
-Route::get('/dashboard', function () {
-    return view('psychologist.dashboard.dashboard');
-})
-->middleware(['auth:psychologist', 'verified'])
-->name('dashboard');
+
+
+Route::get('/dashboard', [PsychologistDashboardController::class, 'index'])
+    ->middleware(['auth:psychologist', 'verified'])
+    ->name('dashboard');
 
 // Rutas protegidas para psicólogos
 Route::middleware(['auth:psychologist', 'verified'])->group(function () {
@@ -40,12 +42,23 @@ Route::middleware(['auth:psychologist', 'verified'])->group(function () {
 
     // Citas
     Route::resource('appointments', AppointmentController::class);
+   
+    // Obtener número de próxima sesión para un paciente
+    Route::get('/patients/{id}/next-session-number', function ($id) {
+        return \App\Models\TherapySession::where('patient_id', $id)->count() + 1;
+    });
+    
+    // Sesiones
+    Route::resource('sessions', TherapySessionController::class)
+        ->names('therapy_sessions');
 
     // Historias clínicas
     Route::resource('clinic-histories', ClinicHistoriesController::class);
 
     // Reportes
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+
+
 });
 
 // Rutas del módulo de psicólogos

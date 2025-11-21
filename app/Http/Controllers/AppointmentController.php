@@ -3,115 +3,98 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Patient;
+use App\Models\Psychologist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // Solo ver las citas del psicólogo autenticado
         $appointments = Appointment::with(['patient'])
-            ->forPsychologist(Auth::id())
-            ->orderBy('schedule_at', 'desc')
-            ->paginate(15);
+            ->where('psychologist_id', Auth::id())
+            ->orderBy('schedule_at', 'asc')
+            ->paginate(10);
 
         return view('appointments.index', compact('appointments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-   public function create()
-{
-    $patients = \App\Models\Patient::all();           // Trae todos los pacientes
-    $psychologists = \App\Models\Psychologist::all(); // Trae todos los psicólogos
-    return view('appointments.create', compact('patients', 'psychologists'));
-}
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create()
     {
-        $validated = $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'session_number' => 'required|integer|min:1',
-            'schedule_at' => 'required|date|after:now',
-            'goals' => 'nullable|string|max:1000',
-        ]);
+        $patients = Patient::orderBy('first_name')->get();
 
-        $validated['psychologist_id'] = Auth::id();
-        $validated['status'] = Appointment::STATUS_SCHEDULED;
-
-        $appointment = Appointment::create($validated);
-
-        return redirect()
-            ->route('appointments.show', $appointment)
-            ->with('success', 'Cita creada exitosamente.');
+        return view('appointments.create', compact('patients'));
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'patient_id' => 'required|exists:patients,id',
+            'schedule_at' => 'required|date|after_or_equal:today',
+            'status' => 'required|integer|in:0,1,2',
+            'notes' => 'nullable|string|max:500',
+        ], [
+            'schedule_at.after_or_equal' => 'La fecha debe ser igual o posterior al día de hoy.',
+        ]);
+
+        Appointment::create([
+            'patient_id' => $request->patient_id,
+            'psychologist_id' => Auth::id(),
+            'schedule_at' => $request->schedule_at,
+            'status' => $request->status,
+            'notes' => $request->notes,
+        ]);
+
+        return redirect()
+            ->route('appointments.index')
+            ->with('success', 'Cita agendada correctamente.');
+    }
+
     public function show(Appointment $appointment)
     {
-        // 🔒 Solo el psicólogo dueño de la cita puede verla
         if ($appointment->psychologist_id !== Auth::id()) {
             abort(403, 'No tienes permiso para ver esta cita.');
         }
 
-        $appointment->load(['patient', 'psychologist']);
-
+        $appointment->load(['patient']);
         return view('appointments.show', compact('appointment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Appointment $appointment)
     {
         if ($appointment->psychologist_id !== Auth::id()) {
             abort(403, 'No tienes permiso para editar esta cita.');
         }
 
-        return view('appointments.edit', compact('appointment'));
+        $patients = Patient::all();
+
+        return view('appointments.edit', compact('appointment', 'patients'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Appointment $appointment)
     {
         if ($appointment->psychologist_id !== Auth::id()) {
-            abort(403, 'No tienes permiso para actualizar esta cita.');
+            abort(403, 'No tienes permiso para editar esta cita.');
         }
 
-        $validated = $request->validate([
-            'session_number' => 'required|integer|min:1',
-            'status' => 'required|integer|min:1|max:6',
-            'schedule_at' => 'required|date',
-            'goals' => 'nullable|string|max:1000',
-            'abstract' => 'nullable|string|max:2000',
-            'progress' => 'nullable|string|max:2000',
-            'mood_last_term' => 'nullable|string|max:500',
-            'psychological_instruments' => 'nullable|string|max:500',
+        $request->validate([
+            'schedule_at' => 'required|date|after_or_equal:today',
+            'status' => 'required|integer|in:0,1,2',
+            'notes' => 'nullable|string|max:500',
         ]);
 
-        $appointment->update($validated);
+        $appointment->update([
+            'schedule_at' => $request->schedule_at,
+            'status' => $request->status,
+            'notes' => $request->notes,
+        ]);
 
         return redirect()
-            ->route('appointments.show', $appointment)
-            ->with('success', 'Cita actualizada exitosamente.');
+            ->route('appointments.index')
+            ->with('success', 'Cita actualizada correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Appointment $appointment)
     {
         if ($appointment->psychologist_id !== Auth::id()) {
@@ -122,6 +105,6 @@ class AppointmentController extends Controller
 
         return redirect()
             ->route('appointments.index')
-            ->with('success', 'Cita eliminada exitosamente.');
+            ->with('success', 'Cita eliminada.');
     }
 }

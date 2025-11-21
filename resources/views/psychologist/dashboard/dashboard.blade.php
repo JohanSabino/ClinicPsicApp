@@ -126,63 +126,37 @@
                     <div class="p-6">
                         <div class="space-y-4">
                             <!-- Cita 1 -->
+                           @forelse($appointmentsToday as $appointment)
                             <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                                 <div class="flex-shrink-0 w-16 text-center">
-                                    <p class="text-2xl font-bold text-blue-600">10:00</p>
-                                    <p class="text-xs text-gray-500">AM</p>
+                                    <p class="text-2xl font-bold text-blue-600">
+                                        {{ \Carbon\Carbon::parse($appointment->schedule_at)->format('H:i') }}
+                                    </p>
+                                    <p class="text-xs text-gray-500">
+                                        {{ \Carbon\Carbon::parse($appointment->schedule_at)->format('A') }}
+                                    </p>
                                 </div>
-                                <div class="ml-4 flex-1">
-                                    <p class="font-semibold text-gray-800">María González</p>
-                                    <p class="text-sm text-gray-600">Sesión de seguimiento</p>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-sm font-medium">
-                                        Ver
-                                    </button>
-                                    <button class="px-3 py-1 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 text-sm font-medium">
-                                        Iniciar
-                                    </button>
-                                </div>
-                            </div>
 
-                            <!-- Cita 2 -->
-                            <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                                <div class="flex-shrink-0 w-16 text-center">
-                                    <p class="text-2xl font-bold text-blue-600">11:30</p>
-                                    <p class="text-xs text-gray-500">AM</p>
-                                </div>
                                 <div class="ml-4 flex-1">
-                                    <p class="font-semibold text-gray-800">Carlos Rodríguez</p>
-                                    <p class="text-sm text-gray-600">Primera consulta</p>
-                                    <span class="inline-block mt-1 px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">
-                                        Nuevo Paciente
-                                    </span>
+                                    <p class="font-semibold text-gray-800">
+                                        {{ $appointment->patient->first_name }} {{ $appointment->patient->last_name }}
+                                    </p>
+                                    <p class="text-sm text-gray-600">
+                                        Sesión #{{ $appointment->session_number }}
+                                    </p>
                                 </div>
-                                <div class="flex gap-2">
-                                    <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-sm font-medium">
-                                        Ver
-                                    </button>
-                                </div>
-                            </div>
 
-                            <!-- Cita 3 -->
-                            <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                                <div class="flex-shrink-0 w-16 text-center">
-                                    <p class="text-2xl font-bold text-blue-600">14:00</p>
-                                    <p class="text-xs text-gray-500">PM</p>
-                                </div>
-                                <div class="ml-4 flex-1">
-                                    <p class="font-semibold text-gray-800">Ana Martínez</p>
-                                    <p class="text-sm text-gray-600">Terapia cognitiva</p>
-                                </div>
                                 <div class="flex gap-2">
-                                    <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-sm font-medium">
+                                    <a href="{{ route('appointments.show', $appointment->id) }}"
+                                    class="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 text-sm font-medium">
                                         Ver
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
+                        @empty
+                            <p class="text-gray-500 text-center py-4">No tienes citas próximas.</p>
+                        @endforelse
                         </div>
-                        
                         <div class="mt-4 pt-4 border-t border-gray-200">
                             <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center justify-center">
                                 Ver todas las citas

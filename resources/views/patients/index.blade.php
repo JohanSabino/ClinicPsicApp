@@ -140,69 +140,111 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
+                           <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($patients as $patient)
                                 <tr class="hover:bg-gray-50 transition-colors duration-200">
+
+                                    <!-- PACIENTE -->
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 h-10 w-10">
                                                 <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
                                                     <span class="text-blue-600 font-medium text-sm">
-                                                        {{ substr($patient['name'], 0, 2) }}
+                                                        {{ strtoupper(substr($patient->first_name, 0, 1) . substr($patient->last_name, 0, 1)) }}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ $patient['name'] }}</div>
-                                                <div class="text-sm text-gray-500">ID: {{ $patient['id'] }}</div>
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    {{ $patient->first_name }} {{ $patient->last_name }}
+                                                </div>
+                                                <div class="text-sm text-gray-500">ID: {{ $patient->id }}</div>
                                             </div>
                                         </div>
                                     </td>
+
+                                    <!-- CONTACTO -->
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ $patient['email'] }}</div>
-                                        <div class="text-sm text-gray-500">{{ $patient['phone'] }}</div>
+                                        <div class="text-sm text-gray-900">{{ $patient->email ?? 'N/A' }}</div>
+                                        <div class="text-sm text-gray-500">{{ $patient->phone_number ?? 'Sin teléfono' }}</div>
                                     </td>
+
+                                    <!-- DOCUMENTO -->
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ $patient['document'] }}
+                                        {{ $patient->identification_number }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @if($patient['status'] === 'Activo')
-                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                                                {{ $patient['status'] }}
-                                            </span>
-                                        @elseif($patient['status'] === 'Pendiente')
-                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                                {{ $patient['status'] }}
-                                            </span>
-                                        @else
-                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
-                                                {{ $patient['status'] }}
-                                            </span>
-                                        @endif
-                                    </td>
+
+                                    <!-- ESTADO -->
+                                 <td class="px-6 py-4 whitespace-nowrap">
+                                    @php
+                                        // Última cita del paciente
+                                        $lastAppointment = $patient->appointments->sortByDesc('schedule_at')->first();
+                                        $status = $lastAppointment->status ?? null;
+                                    @endphp
+
+                                    @if(!$lastAppointment)
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-200 text-gray-700">
+                                            Sin citas
+                                        </span>
+
+                                    @elseif($status === 0)
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                            Pagada
+                                        </span>
+
+                                    @elseif($status === 2)
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            Abonada
+                                        </span>
+
+                                    @elseif($status === 1)
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+                                            Adeudada
+                                        </span>
+
+                                    @else
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                                            Desconocido
+                                        </span>
+                                    @endif
+
+                                </td>
+                                    <!-- ÚLTIMA CITA -->
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ $patient['last_appointment'] ? \Carbon\Carbon::parse($patient['last_appointment'])->format('d/m/Y') : 'N/A' }}
+                                        @php
+                                            $last = $patient->appointments->sortByDesc('date')->first();
+                                        @endphp
+                                        {{ $last ? \Carbon\Carbon::parse($last->date)->format('d/m/Y') : 'N/A' }}
                                     </td>
+
+                                    <!-- PRÓXIMA CITA -->
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ $patient['next_appointment'] ? \Carbon\Carbon::parse($patient['next_appointment'])->format('d/m/Y') : 'N/A' }}
+                                        @php
+                                            $next = $patient->appointments->where('date','>',now())->sortBy('date')->first();
+                                        @endphp
+                                        {{ $next ? \Carbon\Carbon::parse($next->date)->format('d/m/Y') : 'N/A' }}
                                     </td>
+
+                                    <!-- ACCIONES -->
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                        <a href="{{ route('patients.show', $patient['id']) }}" 
-                                           class="text-blue-600 hover:text-blue-900 transition-colors duration-200">
+                                        <a href="{{ route('patients.show', $patient->id) }}" 
+                                        class="text-blue-600 hover:text-blue-900 transition-colors duration-200">
                                             Ver
                                         </a>
-                                        <a href="{{ route('patients.edit', $patient['id']) }}" 
-                                           class="text-indigo-600 hover:text-indigo-900 transition-colors duration-200">
+                                        <a href="{{ route('patients.edit', $patient->id) }}" 
+                                        class="text-indigo-600 hover:text-indigo-900 transition-colors duration-200">
                                             Editar
                                         </a>
-                                        <button onclick="confirmDelete({{ $patient['id'] }})" 
+                                        <button onclick="confirmDelete({{ $patient->id }})" 
                                                 class="text-red-600 hover:text-red-900 transition-colors duration-200">
                                             Eliminar
                                         </button>
                                     </td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                     </div>
 

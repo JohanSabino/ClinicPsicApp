@@ -47,11 +47,12 @@ class PatientController extends Controller
     {
         $request->validate([
             'document_type_id' => 'required|integer',
-            'identification_number' => 'required|string|unique:patients,identification_number',
+            'identification_number' => 'required|numeric|unique:patients,identification_number',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'phone_number' => 'nullable|string|max:20',
-            'birth_date' => 'required|date',
+            'email' => 'nullable|email|max:255',
+            'birth_date' => 'required|date|before_or_equal:today',
             'gender' => 'required|string|max:50',
             'sexual_orientation' => 'nullable|string|max:50',
             'height' => 'nullable|numeric',
@@ -61,11 +62,21 @@ class PatientController extends Controller
             'school_grades' => 'nullable|string',
             'eps_company' => 'nullable|string|max:255',
             'occupation' => 'nullable|string|max:255',
+        ], [
+            'identification_number.numeric' => 'El número de documento solo puede contener dígitos.',
+            'identification_number.unique' => 'Este documento ya está registrado en el sistema.',
+            'document_type_id.required' => 'Debe seleccionar un tipo de documento.',
+            'first_name.required' => 'El campo nombres es obligatorio.',
+            'last_name.required' => 'El campo apellidos es obligatorio.',
+            'gender.required' => 'Debe seleccionar un género.',
+            'birth_date.required' => 'Debe ingresar la fecha de nacimiento.',
+            'birth_date.before_or_equal' => 'La fecha de nacimiento no puede ser mayor a la fecha actual.',
         ]);
 
-        $patient = Patient::create($request->all());
+        Patient::create($request->all());
 
-        return redirect()->route('patients.index')->with('success', 'Paciente creado correctamente.');
+        return redirect()->route('patients.index')
+                        ->with('success', 'Paciente creado correctamente.');
     }
 
     public function update(Request $request, $id)
@@ -78,6 +89,7 @@ class PatientController extends Controller
             'first_name' => 'sometimes|required|string|max:255',
             'last_name' => 'sometimes|required|string|max:255',
             'phone_number' => 'sometimes|nullable|string|max:20',
+            'email' => 'sometimes|nullable|email|max:255',
             'birth_date' => 'sometimes|required|date',
             'gender' => 'sometimes|required|string|max:50',
             'sexual_orientation' => 'sometimes|nullable|string|max:50',
