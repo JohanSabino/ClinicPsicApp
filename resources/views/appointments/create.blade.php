@@ -57,20 +57,30 @@
 
                         <!-- ESTADO -->
                         <div class="mb-4">
-                            <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
-                                Estado *
-                            </label>
-                            <select id="status" name="status" required
+                          <select id="status" name="status" required
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md">
+
                                 <option value="">Seleccione un estado</option>
-                                <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Pagada</option>
-                                <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Adeudada</option>
-                                <option value="2" {{ old('status') == 2 ? 'selected' : '' }}>Abonada</option>
+
+                                <option value="paid" {{ old('status') == 'paid' ? 'selected' : '' }}>
+                                    Pagada
+                                </option>
+
+                                <option value="owed" {{ old('status') == 'owed' ? 'selected' : '' }}>
+                                    Adeudada
+                                </option>
+
+                                <option value="partial" {{ old('status') == 'partial' ? 'selected' : '' }}>
+                                    Abonada
+                                </option>
+
                             </select>
+
+
                             @error('status')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                             @enderror
-                        </div>
+
 
                         <!-- FECHA Y HORA -->
                         <div class="mb-4">

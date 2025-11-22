@@ -28,16 +28,12 @@ class Appointment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'patient_id',
-        'psychologist_id',
-        'session_number',
-        'status',
-        'goals',
-        'abstract',
-        'progress',
-        'mood_last_term',
-        'psychological_instruments',
-        'schedule_at',
+    'patient_id',
+    'psychologist_id',
+    'schedule_at',
+    'status',
+    'notes',
+    'session_number',
     ];
 
     /**
@@ -59,9 +55,9 @@ class Appointment extends Model
     /**
      * Relación con el paciente
      */
-    public function patient(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+  public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class, 'patient_id')->withTrashed();
     }
 
     /**

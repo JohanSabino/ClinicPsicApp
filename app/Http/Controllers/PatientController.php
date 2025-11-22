@@ -36,8 +36,18 @@ class PatientController extends Controller
     public function showView($id)
     {
         $patient = Patient::findOrFail($id);
-        return view('patients.show', compact('patient'));
+
+        // Obtener la última cita del paciente
+        $lastAppointment = $patient->appointments()
+            ->orderBy('schedule_at', 'desc')
+            ->first();
+        $nextAppointment = $patient->appointments()
+        ->where('schedule_at', '>', now())
+        ->orderBy('schedule_at', 'asc')
+        ->first();
+        return view('patients.show', compact('patient', 'lastAppointment', 'nextAppointment'));
     }
+
 
     /* ==============================================
        ACCIONES (POST/PUT/DELETE)
@@ -135,4 +145,7 @@ class PatientController extends Controller
 
         return response()->json(['status' => 'success', 'data' => $patient], 200);
     }
+
+
+
 }

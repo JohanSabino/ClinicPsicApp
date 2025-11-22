@@ -66,3 +66,8 @@ require __DIR__.'/psychologist.php';
 
 // Rutas de auth estándar (si existen)
 require __DIR__.'/auth.php';
+
+// Redirigir siempre el login global al login de psicólogos
+Route::get('/login', function () {
+    return redirect('/psychologist/login');
+})->name('login');

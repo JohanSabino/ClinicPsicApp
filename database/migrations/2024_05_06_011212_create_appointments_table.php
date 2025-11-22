@@ -10,13 +10,20 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('patient_id')->constrained('patients')->cascadeOnDelete();
             $table->foreignId('psychologist_id')->constrained('psychologists')->cascadeOnDelete();
-            $table->dateTime('schedule_at'); // fecha agendada
-            $table->enum('status', ['pending','confirmed','cancelled'])->default('pending');
+
+            $table->integer('session_number')->default(1);
+            $table->dateTime('schedule_at');
+
+            $table->string('status', 20)->default('pending');
             $table->text('notes')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
+
     }
 
     public function down(): void

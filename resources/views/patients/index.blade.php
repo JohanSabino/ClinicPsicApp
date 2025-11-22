@@ -235,10 +235,15 @@
                                         class="text-indigo-600 hover:text-indigo-900 transition-colors duration-200">
                                             Editar
                                         </a>
-                                        <button onclick="confirmDelete({{ $patient->id }})" 
+                                       <button onclick="confirmDelete({{ $patient->id }})" 
                                                 class="text-red-600 hover:text-red-900 transition-colors duration-200">
                                             Eliminar
                                         </button>
+                                        <form id="delete-form" action="" method="POST" class="hidden">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
                                     </td>
 
                                 </tr>
@@ -271,12 +276,13 @@
     </div>
 
     <!-- JavaScript para confirmación de eliminación -->
-    <script>
-        function confirmDelete(patientId) {
-            if (confirm('¿Estás seguro de que deseas eliminar este paciente?')) {
-                // Aquí iría la lógica para eliminar
-                alert('Funcionalidad de eliminación no implementada en esta demo');
+        <script>
+            function confirmDelete(patientId) {
+                if (confirm('¿Estás seguro de que deseas eliminar este paciente?')) {
+                    const form = document.getElementById('delete-form');
+                    form.action = "/patients/" + patientId; // ruta RESTful
+                    form.submit();
+                }
             }
-        }
-    </script>
+        </script>
 </x-app-layout>

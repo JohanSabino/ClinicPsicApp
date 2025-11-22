@@ -42,14 +42,17 @@
                     </td>
 
                     <td class="px-4 py-2 border-b">
-                        @if($appointment->status == 0)
-                            <span class="text-yellow-600">Pendiente</span>
-                        @elseif($appointment->status == 1)
-                            <span class="text-green-600">Completada</span>
+                        @if($appointment->status === 'paid')
+                            <span class="text-green-600 font-semibold">Pagada</span>
+                        @elseif($appointment->status === 'owed')
+                            <span class="text-red-600 font-semibold">Adeudada</span>
+                        @elseif($appointment->status === 'partial')
+                            <span class="text-yellow-600 font-semibold">Abonada</span>
                         @else
-                            <span class="text-red-600">Cancelada</span>
+                            <span class="text-gray-500">Desconocido</span>
                         @endif
                     </td>
+
 
                     <td class="px-4 py-2 border-b">
                         <a href="{{ route('appointments.show', $appointment->id) }}"

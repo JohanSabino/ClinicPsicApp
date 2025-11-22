@@ -32,11 +32,14 @@ class AppointmentController extends Controller
         $request->validate([
             'patient_id' => 'required|exists:patients,id',
             'schedule_at' => 'required|date|after_or_equal:today',
-            'status' => 'required|integer|in:0,1,2',
+            'status' => 'required|string|in:paid,owed,partial',
             'notes' => 'nullable|string|max:500',
         ], [
             'schedule_at.after_or_equal' => 'La fecha debe ser igual o posterior al día de hoy.',
         ]);
+
+        // Calcular el número de sesión del paciente
+        $sessionNumber = Appointment::where('patient_id', $request->patient_id)->count() + 1;
 
         Appointment::create([
             'patient_id' => $request->patient_id,
@@ -44,12 +47,14 @@ class AppointmentController extends Controller
             'schedule_at' => $request->schedule_at,
             'status' => $request->status,
             'notes' => $request->notes,
+            'session_number' => $sessionNumber,
         ]);
 
         return redirect()
             ->route('appointments.index')
             ->with('success', 'Cita agendada correctamente.');
     }
+
 
     public function show(Appointment $appointment)
     {
@@ -80,7 +85,7 @@ class AppointmentController extends Controller
 
         $request->validate([
             'schedule_at' => 'required|date|after_or_equal:today',
-            'status' => 'required|integer|in:0,1,2',
+            'status' => 'required|string|in:paid,owed,partial',
             'notes' => 'nullable|string|max:500',
         ]);
 
