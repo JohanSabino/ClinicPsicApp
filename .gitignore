@@ -18,4 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 .env.testing
-phpunit.xml
+phpunit.xmlapp/Http/Controllers/Psychologist/Auth/AuthenticatedSessionController copy.php
