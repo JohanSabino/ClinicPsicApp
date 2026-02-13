@@ -44,27 +44,74 @@
                             {{ __('Home') }}
                         </x-nav-link>
                     </li>
+
                     <li class="mr-3">
-                        <x-nav-link href="#">Contact us</x-nav-link>
+                        <x-nav-link href="#">
+                            {{ __('Contact us') }}
+                        </x-nav-link>
                     </li>
+
                     <li class="mr-3">
-                        <x-nav-link href="#">Services</x-nav-link>
+                        <x-nav-link href="#">
+                            {{ __('Services') }}
+                        </x-nav-link>
                     </li>
+
                     <li class="mr-3">
-                        <x-nav-link href="{{ route('psychologist.login') }}">Login</x-nav-link>
+                        <x-nav-link href="{{ route('psychologist.login') }}">
+                            {{ __('Login') }}
+                        </x-nav-link>
                     </li>
                 </ul>
 
-                <a
-                    id="navAction"
-                    class="mx-auto lg:mx-0 hover:underline bg-gray-200 text-gray-900 font-bold rounded-full
-                            mt-4 lg:mt-0 py-4 px-8 shadow-lg opacity-100 border-2 border-white
-                            focus:outline-none focus:shadow-outline transform transition hover:scale-105
-                            duration-300 ease-in-out"
-                    href="{{ route('psychologist.register') }}"
-                    >
-                    {{ __("Suscríbase") }}
-                </a>
+                {{-- Acciones: Subscribe + Toggle idioma --}}
+                @php
+                $isEn = app()->getLocale() === 'en';
+                @endphp
+
+                <div class="flex flex-col lg:flex-row items-center gap-3 w-full lg:w-auto">
+                    {{-- Botón Subscribe --}}
+                    <a id="navAction" class="w-full lg:w-auto text-center mx-auto lg:mx-0 hover:underline bg-gray-200 text-gray-900 font-bold rounded-full
+              mt-4 lg:mt-0 py-4 px-8 shadow-lg opacity-100 border-2 border-white
+              focus:outline-none focus:shadow-outline transform transition hover:scale-105
+              duration-300 ease-in-out" href="{{ route('psychologist.register') }}">
+                        {{ __('Subscribe') }}
+                    </a>
+
+                    {{-- Toggle ES/EN --}}
+                    <div class="ml-0 lg:ml-3 mt-3 lg:mt-0 flex items-center">
+                        <span class="text-xs font-semibold mr-2 {{ $isEn ? 'text-white/60' : 'text-white' }}">ES</span>
+
+                        <label class="relative inline-flex items-center cursor-pointer select-none">
+                            <input id="langToggle" type="checkbox" class="sr-only" {{ $isEn ? 'checked' : '' }}>
+
+                            {{-- Track --}}
+                            <div class="w-10 h-6 rounded-full border transition-colors duration-300
+            {{ $isEn ? 'bg-gray-200 border-white' : 'bg-white/15 border-white/40' }}">
+                            </div>
+
+                            {{-- Knob --}}
+                            <div class="absolute left-0.5 top-0.5 w-5 h-5 rounded-full bg-white shadow
+            transition-transform duration-300 transform
+            {{ $isEn ? 'translate-x-4' : 'translate-x-0' }}">
+                            </div>
+                        </label>
+
+                        <span
+                            class="text-xs font-semibold ml-2 {{ $isEn ? 'text-gray-900' : 'text-white/60' }}">EN</span>
+                    </div>
+                </div>
+
+                <script>
+                    const langToggle = document.getElementById('langToggle');
+                    if (langToggle) {
+                        langToggle.addEventListener('change', function() {
+                            window.location.href = this.checked ?
+                                "{{ route('lang.switch', 'en') }}" :
+                                "{{ route('lang.switch', 'es') }}";
+                        });
+                    }
+                </script>
 
             </div>
 

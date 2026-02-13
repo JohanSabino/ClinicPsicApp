@@ -19,3 +19,6 @@ yarn-error.log
 /.vscode
 .env.testing
 phpunit.xmlapp/Http/Controllers/Psychologist/Auth/AuthenticatedSessionController copy.php
+
+# Ignore accidental copies
+app/Http/Controllers/Psychologist/Auth/* copy.php

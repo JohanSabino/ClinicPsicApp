@@ -13,6 +13,18 @@ use App\Http\Controllers\Psychologist\PsychologistDashboardController;
 // Home
 Route::view('/', 'home')->name('home');
 
+// Language switch (público)
+Route::get('/lang/{locale}', function (string $locale) {
+    $allowed = ['es', 'en'];
+
+    if (! in_array($locale, $allowed, true)) {
+        $locale = config('app.fallback_locale', 'es');
+    }
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->name('lang.switch');
 // Dashboard (psicólogo)
 
 
