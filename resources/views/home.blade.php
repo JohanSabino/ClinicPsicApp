@@ -26,26 +26,26 @@
                             </svg>
                             {{ __("Comenzar Gratis") }}
                         </button>
-                        <button class="w-full sm:w-auto border-2 border-white text-white font-semibold rounded-full py-3 sm:py-4 px-6 sm:px-8 hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out">
+                        {{-- <button class="w-full sm:w-auto border-2 border-white text-white font-semibold rounded-full py-3 sm:py-4 px-6 sm:px-8 hover:bg-white hover:text-gray-800 transition duration-300 ease-in-out">
                             <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m0 0h1m0-1h1M8 9h1v3H8V9zm5 0v5"/>
                             </svg>
                             {{ __("Ver Demo") }}
-                        </button>
+                        </button> --}}
                     </div>
                     
                     <!-- Stats o badges -->
                     <div class="flex flex-wrap justify-center lg:justify-start gap-6 mt-8">
                         <div class="text-center">
-                            <div class="text-2xl sm:text-3xl font-bold text-white">500+</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">Útil con</div>
                             <div class="text-xs sm:text-sm text-white/70">Psicólogos</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-2xl sm:text-3xl font-bold text-white">10K+</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">Trata</div>
                             <div class="text-xs sm:text-sm text-white/70">Pacientes</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-2xl sm:text-3xl font-bold text-white">50K+</div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">Ordena</div>
                             <div class="text-xs sm:text-sm text-white/70">Consultas</div>
                         </div>
                     </div>
