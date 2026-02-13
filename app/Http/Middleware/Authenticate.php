@@ -12,12 +12,7 @@ class Authenticate extends Middleware
             return null;
         }
 
-        // Si un día tienes admin:
-        if ($request->is('admin/*')) {
-            return route('admin.login');
-        }
-
-        // Default: psicólogos
+        // Default para tu app
         return route('psychologist.login');
     }
 }
