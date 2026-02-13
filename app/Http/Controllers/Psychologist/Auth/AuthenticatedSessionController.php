@@ -28,21 +28,34 @@ class AuthenticatedSessionController extends Controller
     /**
      * Procesar login web del psicólogo.
      */
-   public function store(LoginRequest $request): RedirectResponse
+   public function store(Request $request): RedirectResponse
     {
-        $credentials = $request->only('email', 'password');
+        $data = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
-        // AUTENTICACIÓN CORRECTA PARA PSICÓLOGOS
-        if (!Auth::guard('psychologist')->attempt($credentials, $request->boolean('remember'))) {
-            throw ValidationException::withMessages([
+        $email = strtolower(trim($data['email']));
+        $password = $data['password'];
+        $remember = $request->boolean('remember');
+
+        // Buscar psicólogo (case-insensitive)
+        $psychologist = \App\Models\Psychologist::whereRaw('LOWER(email) = ?', [$email])->first();
+
+        if (!$psychologist || !\Illuminate\Support\Facades\Hash::check($password, $psychologist->password)) {
+            return back()->withErrors([
                 'email' => __('Las credenciales proporcionadas no coinciden con nuestros registros.'),
-            ]);
+            ])->onlyInput('email');
         }
+
+        // Login con el guard correcto
+        \Illuminate\Support\Facades\Auth::guard('psychologist')->login($psychologist, $remember);
 
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard'));
     }
+
 
     /**
      * Cerrar sesión web del psicólogo.
