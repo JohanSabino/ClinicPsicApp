@@ -36,25 +36,26 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         $email = strtolower(trim($data['email']));
-        $password = $data['password'];
         $remember = $request->boolean('remember');
 
-        // Buscar psicólogo (case-insensitive)
-        $psychologist = \App\Models\Psychologist::whereRaw('LOWER(email) = ?', [$email])->first();
+        // Buscar psicólogo por email (case-insensitive)
+        $psychologist = Psychologist::whereRaw('LOWER(email) = ?', [$email])->first();
 
-        if (!$psychologist || !\Illuminate\Support\Facades\Hash::check($password, $psychologist->password)) {
+        if (!$psychologist || !Hash::check($data['password'], $psychologist->password)) {
             return back()->withErrors([
                 'email' => __('Las credenciales proporcionadas no coinciden con nuestros registros.'),
             ])->onlyInput('email');
         }
 
-        // Login con el guard correcto
-        \Illuminate\Support\Facades\Auth::guard('psychologist')->login($psychologist, $remember);
+        // Login explícito con el guard correcto
+        Auth::guard('psychologist')->login($psychologist, $remember);
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard'));
+        // Forzar dashboard (sin intended)
+        return redirect()->route('dashboard');
     }
+
 
 
     /**
