@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Psychologist\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Psychologist\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
@@ -28,7 +27,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Procesar login web del psicólogo.
      */
-   public function store(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'email' => ['required', 'email'],
@@ -55,6 +54,7 @@ class AuthenticatedSessionController extends Controller
         // Forzar dashboard (sin intended)
         return redirect()->route('dashboard');
     }
+
 
 
 
