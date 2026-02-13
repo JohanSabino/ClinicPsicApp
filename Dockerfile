@@ -5,6 +5,9 @@ RUN apt-get update && apt-get install -y \
     git unzip libzip-dev libpng-dev libonig-dev libxml2-dev \
     && docker-php-ext-install pdo_mysql mbstring zip bcmath \
     && a2enmod rewrite \
+    && a2dismod mpm_event || true \
+    && a2dismod mpm_worker || true \
+    && a2enmod mpm_prefork \
     && rm -rf /var/lib/apt/lists/*
 
 # Permitir .htaccess (Laravel lo usa para rutas)
