@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TherapySessionController;
 use App\Http\Controllers\Psychologist\PsychologistDashboardController;
 
+// Pages
+Route::get('/services', [App\Http\Controllers\PageController::class, 'services'])->name('services');
+Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('contact');
+
 // Home
 Route::view('/', 'home')->name('home');
 
@@ -22,6 +26,7 @@ Route::get('/lang/{locale}', function (string $locale) {
     }
 
     session(['locale' => $locale]);
+    \Illuminate\Support\Facades\Log::info('Route lang.switch: Session parsed. Locale set to: ' . $locale);
 
     return redirect()->back();
 })->name('lang.switch');

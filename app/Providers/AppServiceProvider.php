@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Add JSON paths for nested language files
+        app('translator')->addJsonPath(lang_path('es'));
+        app('translator')->addJsonPath(lang_path('en'));
     }
 }

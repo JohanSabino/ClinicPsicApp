@@ -46,13 +46,13 @@
                     </li>
 
                     <li class="mr-3">
-                        <x-nav-link href="#">
+                        <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">
                             {{ __('Contact us') }}
                         </x-nav-link>
                     </li>
 
                     <li class="mr-3">
-                        <x-nav-link href="#">
+                        <x-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">
                             {{ __('Services') }}
                         </x-nav-link>
                     </li>
@@ -82,8 +82,8 @@
                     <div class="ml-0 lg:ml-3 mt-3 lg:mt-0 flex items-center">
                         <span class="toggleColour text-xs mr-2 {{ $isEn ? 'font-normal opacity-60' : 'font-bold' }}">ES</span>
 
-                        <label class="relative inline-flex items-center cursor-pointer select-none">
-                            <input id="langToggle" type="checkbox" class="sr-only" {{ $isEn ? 'checked' : '' }}>
+                        <label for="langToggle" class="relative inline-flex items-center cursor-pointer select-none">
+                            <input id="langToggle" type="checkbox" class="sr-only" autocomplete="off" {{ $isEn ? 'checked' : '' }}>
 
                             {{-- Track --}}
                             <div class="w-10 h-6 rounded-full border transition-colors duration-300
@@ -103,14 +103,17 @@
                 </div>
 
                 <script>
-                    const langToggle = document.getElementById('langToggle');
-                    if (langToggle) {
-                        langToggle.addEventListener('change', function() {
-                            window.location.href = this.checked ?
-                                "{{ route('lang.switch', 'en') }}" :
-                                "{{ route('lang.switch', 'es') }}";
-                        });
-                    }
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const langToggle = document.getElementById('langToggle');
+                        if (langToggle) {
+                            langToggle.addEventListener('change', function() {
+                                const url = this.checked ?
+                                    "{{ route('lang.switch', 'en') }}" :
+                                    "{{ route('lang.switch', 'es') }}";
+                                window.location.href = url;
+                            });
+                        }
+                    });
                 </script>
 
             </div>
