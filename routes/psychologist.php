@@ -17,7 +17,8 @@ use App\Http\Controllers\Psychologist\Auth\VerifyEmailController;
 Route::middleware('guest')->prefix('psychologist')->name('psychologist.')->group(function () {
     Route::get('register', [RegisteredPsychologistController::class, 'create'])
         ->name('register');
-    Route::post('register', [RegisteredPsychologistController::class, 'store']);
+    Route::post('register', [RegisteredPsychologistController::class, 'store'])
+        ->name('store');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

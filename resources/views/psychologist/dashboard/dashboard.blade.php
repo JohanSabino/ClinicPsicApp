@@ -126,8 +126,8 @@
                     <div class="p-6">
                         <div class="space-y-4">
                             <!-- Cita 1 -->
-                           @forelse($appointmentsToday as $appointment)
-                            <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                            @forelse ($appointmentsToday as $appointment)
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                                 <div class="flex-shrink-0 w-16 text-center">
                                     <p class="text-2xl font-bold text-blue-600">
                                         {{ \Carbon\Carbon::parse($appointment->schedule_at)->format('H:i') }}

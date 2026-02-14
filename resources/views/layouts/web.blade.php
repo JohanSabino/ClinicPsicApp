@@ -35,7 +35,7 @@
                 </button>
             </div>
             <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0
-                    bg-white lg:bg-transparent text-gray-800 lg:text-white
+                    bg-blue-900 lg:bg-transparent text-white
                     p-4 lg:p-0 z-20 transition-colors duration-300" id="nav-content">
 
                 <ul class="list-reset lg:flex justify-end flex-1 items-center">
@@ -80,7 +80,7 @@
 
                     {{-- Toggle ES/EN --}}
                     <div class="ml-0 lg:ml-3 mt-3 lg:mt-0 flex items-center">
-                        <span class="text-xs font-semibold mr-2 {{ $isEn ? 'text-white/60' : 'text-white' }}">ES</span>
+                        <span class="toggleColour text-xs mr-2 {{ $isEn ? 'font-normal opacity-60' : 'font-bold' }}">ES</span>
 
                         <label class="relative inline-flex items-center cursor-pointer select-none">
                             <input id="langToggle" type="checkbox" class="sr-only" {{ $isEn ? 'checked' : '' }}>
@@ -98,7 +98,7 @@
                         </label>
 
                         <span
-                            class="text-xs font-semibold ml-2 {{ $isEn ? 'text-gray-900' : 'text-white/60' }}">EN</span>
+                            class="toggleColour text-xs ml-2 {{ $isEn ? 'font-bold' : 'font-normal opacity-60' }}">EN</span>
                     </div>
                 </div>
 

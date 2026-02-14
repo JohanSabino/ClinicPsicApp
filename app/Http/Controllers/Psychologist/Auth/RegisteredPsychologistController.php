@@ -18,7 +18,7 @@ class RegisteredPsychologistController extends Controller
     public function create(): View|Factory
     {
         return view('psychologist.auth.create', [
-            'documentTypes' => DocumentType::psychologistDocumentTypes()->get(),
+            'documentTypes' => DocumentType::all(),
         ]);
     }
 
@@ -34,6 +34,9 @@ class RegisteredPsychologistController extends Controller
         $psychologist->document_type_id = $request->get('document-type');
         $psychologist->identification_number = $request->get('identification-number');
         $psychologist->professional_card_number = $request->get('professional-card-number');
+        $psychologist->phone = $request->get('phone');
+        $psychologist->specialty = $request->get('specialty');
+        $psychologist->academic_profile = $request->get('academic-profile');
         $psychologist->password = Hash::make($request->get('password'));
         $psychologist->save();
 

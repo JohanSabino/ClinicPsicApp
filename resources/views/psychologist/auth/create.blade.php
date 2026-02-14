@@ -113,6 +113,38 @@
                             </div>
                         </div>
 
+                        <div class="sm:col-span-3">
+                            <x-form.form-label for="phone">{{ __('Teléfono') }}</x-form.form-label>
+                            <div class="mt-2">
+                                <x-form.form-input type="tel" name="phone" id="phone" 
+                                                   placeholder="Ej: 3001234567" 
+                                                   autocomplete="tel" 
+                                                   value="{{ old('phone') }}"/>
+                                <x-form.form-error name="phone"/>
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <x-form.form-label for="specialty">{{ __('Especialidad') }}</x-form.form-label>
+                            <div class="mt-2">
+                                <x-form.form-input type="text" name="specialty" id="specialty" 
+                                                   placeholder="Ej: Psicología Clínica, Neuropsicología" 
+                                                   autocomplete="organization-title" 
+                                                   value="{{ old('specialty') }}"/>
+                                <x-form.form-error name="specialty"/>
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-6">
+                            <x-form.form-label for="academic-profile">{{ __('Perfil Académico') }}</x-form.form-label>
+                            <div class="mt-2">
+                                <textarea id="academic-profile" name="academic-profile" rows="3" 
+                                          class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                          placeholder="Describe brevemente tu formación y experiencia...">{{ old('academic-profile') }}</textarea>
+                                <x-form.form-error name="academic-profile"/>
+                            </div>
+                        </div>
+
 
                         <div class="sm:col-span-3">
                             <x-form.form-label for="password">{{ __('Contraseña') }}</x-form.form-label>
@@ -150,7 +182,7 @@
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
-                        {{ __('Volver al Login') }}
+                        {{ __('Volver') }}
                     </a>
                     
                     <div class="flex gap-x-3">
