@@ -1,16 +1,22 @@
 <x-psychologist-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Sesiones Clínicas
-            </h2>
+    <div class="pt-16">
+        <div class="background-clinic-gradient py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-semibold text-2xl text-white leading-tight">
+                        Sesiones Clínicas
+                    </h2>
+                    <a href="{{ route('therapy_sessions.create') }}"
+                        class="bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all duration-200 flex items-center">
 
-            <a href="{{ route('therapy_sessions.create') }}"
-               class="bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all duration-200">
-                + Registrar sesión
-            </a>
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Registrar sesión
+                    </a>
+                </div>
+            </div>
         </div>
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -1,28 +1,16 @@
 <x-psychologist-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Dashboard') }}
-            </h2>
-            <p class="text-sm text-gray-600">
-                {{ now()->locale('es')->isoFormat('dddd, D [de] MMMM [de] YYYY') }}
+    <div class="background-clinic-gradient pt-24 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-white">
+            <h1 class="text-3xl font-bold mb-2">
+                ¡Bienvenido de nuevo, {{ Auth::user()->name }}! 👋
+            </h1>
+            <p class="text-blue-100">
+                Aquí tienes un resumen de tu práctica hoy
             </p>
         </div>
-    </x-slot>
-
-    <!-- Hero Section con Gradiente -->
-    <div class="background-clinic-gradient py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-white">
-                <h1 class="text-3xl font-bold mb-2">
-                    ¡Bienvenido de nuevo, {{ Auth::user()->name }}! 👋
-                </h1>
-                <p class="text-blue-100">
-                    Aquí tienes un resumen de tu práctica hoy
-                </p>
-            </div>
-        </div>
     </div>
+</div>
 
     <!-- Stats Cards -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-12">

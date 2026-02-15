@@ -1,24 +1,17 @@
-@props(['header'])
+<div class="min-h-screen bg-gray-50 pt-16">
 
+    {{-- Fondo detrás del navbar fixed --}}
+    <div class="fixed top-0 left-0 w-full h-16 background-clinic-gradient -z-10"></div>
 
-<div class="min-h-screen bg-gray-100">
-
-
-    {{-- NAVBAR SUPERIOR (igual al de Jetstream) --}}
     @include('layouts.navigation')
 
-    {{-- ENCABEZADO --}}
-    @if (isset($header))
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-    @endif
+    @isset($header)
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {{ $header }}
+        </div>
+    @endisset
 
-    {{-- CONTENIDO PRINCIPAL --}}
     <main>
         {{ $slot }}
     </main>
-
 </div>
